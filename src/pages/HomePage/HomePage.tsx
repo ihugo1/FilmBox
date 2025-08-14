@@ -8,8 +8,11 @@ export const HomePage = () => {
 
   return (
     <div className={styles.homePage}>
-      <Hero movie={movies[4]}/>
-      <MovieGrid movies={movies} loading={loading}/>
+      <Hero movie={movies[0]}/>
+      <section className={styles.popularSection}>
+        <h2>Popular right now</h2>
+        <MovieGrid movies={movies.slice(0, 10)} loading={loading}/>
+      </section>
     </div>
   )
 }

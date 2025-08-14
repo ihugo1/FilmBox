@@ -1,0 +1,55 @@
+.movieCard {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.movieCard:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.poster {
+  width: 100%;
+  aspect-ratio: 2/3;
+  object-fit: cover;
+  background-color: var(--color-border);
+}
+
+.title {
+  padding: var(--space-md);
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Responsive Sizes */
+@media (max-width: 768px) {
+  .movieCard {
+    width: 150px;
+  }
+  
+  .title {
+    padding: var(--space-sm);
+    font-size: var(--font-size-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .movieCard {
+    width: 120px;
+  }
+  
+  .title {
+    padding: var(--space-xs);
+    font-size: var(--font-size-xs);
+  }
+}

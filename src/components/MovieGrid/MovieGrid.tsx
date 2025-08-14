@@ -1,5 +1,6 @@
 import styles from "./MovieGrid.module.css";
 import type { Movie } from "../../types/movie";
+import { MovieCard } from "../MovieCard/MovieCard";
 
 interface MovieGridProps {
   movies: Movie[];
@@ -11,11 +12,9 @@ export const MovieGrid = ({ movies, loading }: MovieGridProps) => {
     return <div>Loading movies...</div>;
   }
   return (
-    <div className={styles.grid}>
+    <div className={styles.movieGrid}>
       {movies.map((movie) => (
-        <div key={movie.id}>
-          {movie.title}
-        </div>
+        <MovieCard movie={movie} key={movie.id} />
       ))}
     </div>
   );
