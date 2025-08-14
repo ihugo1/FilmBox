@@ -1,0 +1,134 @@
+/* Hero Container */
+.hero {
+  position: relative;
+  height: 92vh;
+  min-height: 500px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.content {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: rgba(26, 26, 26, 0.8);
+  color: var(--color-text-light);
+}
+
+.movieInfo {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl);
+}
+
+.title {
+  font-size: var(--font-size-4xl);
+  font-weight: 700;
+}
+
+.overview {
+  font-size: var(--font-size-lg);
+  max-height: 150px;
+}
+
+.movieDetails {
+  display: flex;
+  gap: var(--space-lg);
+}
+
+.year,
+.rating {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: var(--space-sm);
+  border-radius: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .movieInfo {
+    width: 70%;
+    gap: var(--space-xl);
+  }
+  
+  .title {
+    font-size: var(--font-size-3xl);
+  }
+}
+
+@media (max-width: 768px) {
+  .content {
+    justify-content: center;
+    padding: var(--space-lg);
+    flex-direction: column;
+  }
+  
+  .movieInfo {
+    width: 90%;
+    gap: var(--space-lg);
+  }
+  
+  .title {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .overview {
+    font-size: var(--font-size-md);
+    max-height: 120px;
+    overflow: hidden;
+  }
+  
+  .movieDetails {
+    gap: var(--space-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    height: 60vh;
+    min-height: 300px;
+  }
+  
+  .content {
+    padding: var(--space-md);
+  }
+  
+  .movieInfo {
+    width: 95%;
+    gap: var(--space-md);
+  }
+  
+  .title {
+    font-size: var(--font-size-xl);
+  }
+  
+  .overview {
+    font-size: var(--font-size-sm);
+    max-height: 100px;
+  }
+  
+  .movieDetails {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-sm);
+  }
+  
+  .year,
+  .rating {
+    padding: var(--space-xs) var(--space-sm);
+  }
+}

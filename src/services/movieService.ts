@@ -40,7 +40,7 @@ export const getMovieById = async (id: number): Promise<Movie> => {
  * @throws Error when the API request fails
  */
 export const getPopular = async (): Promise<MovieListResponse> => {
-  const url = `${API_CONFIG.baseUrl}movie/popular?language=en-US`;
+  const url = `${API_CONFIG.baseUrl}/movie/popular?language=en-US`;
 
   const response = await fetch(url, { headers: API_HEADERS});
   if(!response.ok){
