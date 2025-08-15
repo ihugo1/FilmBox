@@ -1,4 +1,5 @@
 import styles from "./MovieGrid.module.css";
+import React from "react";
 import type { Movie } from "../../types/movie";
 import { MovieCard } from "../MovieCard/MovieCard";
 
@@ -7,10 +8,11 @@ interface MovieGridProps {
   loading: boolean;
 }
 
-export const MovieGrid = ({ movies, loading }: MovieGridProps) => {
-  if (loading) {
+export const MovieGrid = React.memo(({ movies, loading }: MovieGridProps) => {
+  if (loading && movies.length === 0) {
     return <div>Loading movies...</div>;
   }
+
   return (
     <div className={styles.movieGrid}>
       {movies.map((movie) => (
@@ -18,4 +20,4 @@ export const MovieGrid = ({ movies, loading }: MovieGridProps) => {
       ))}
     </div>
   );
-};
+});

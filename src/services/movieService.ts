@@ -50,3 +50,16 @@ export const getPopular = async (): Promise<MovieListResponse> => {
 
   return movieListData;
 }
+
+export const searchMovies = async (query: string, page: number): Promise<MovieListResponse> => {
+  const url = 
+  `${API_CONFIG.baseUrl}/search/movie?query=${encodeURIComponent(query)}&language=en-US&page=${page}`;
+
+  const response = await fetch(url, { headers: API_HEADERS });
+  if (!response.ok) {
+    throw new Error(`Error: ${response.status}`);
+  }
+  const movieListData: MovieListResponse = await response.json();
+
+  return movieListData;
+}

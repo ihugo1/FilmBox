@@ -67,7 +67,9 @@ ul, ol {
   --font-size-4xl: 3rem;     /* 48px */
 
   /* Color */
-  --background-color: #010e18;
+  --background-color: #1a2731;
+  --background-color-light: #2b373f; 
+  --accent-color: #017e35;
   --text-color-light: #d3d3d3;
   --text-color-dark: #1d1d1d;
 

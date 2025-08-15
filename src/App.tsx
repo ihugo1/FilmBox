@@ -1,10 +1,12 @@
-import { HomePage } from "./pages/HomePage/HomePage"
+import { Navbar } from "./components/NavBar/Navbar";
+import { HomePage } from "./pages/HomePage/HomePage";
+import { SearchPage } from "./pages/SearchPage/SearchPage";
 
 export function App() {
   return (
     <>
-      <HomePage/>
+      <Navbar />
+      <SearchPage />
     </>
-  )
+  );
 }
-
