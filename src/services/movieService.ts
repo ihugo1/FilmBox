@@ -22,31 +22,24 @@ export type CreditResponse = {
   crew: CrewMember[];
 };
 
-/* BASE URL */
-const baseUrl = API_CONFIG.baseUrl;
-
-/* FUNCTIONS */
-export const getMovieById = async (id: number): Promise<Movie> => {
-  const url = `${baseUrl}/movie/${id}?language=en-US`;
-
+/* API REQUEST FUNCTION */
+const apiRequest = async (endpoint: string) => {
+  const url = `${API_CONFIG.baseUrl}${endpoint}`;
   const response = await fetch(url, { headers: API_HEADERS });
   if (!response.ok) {
     throw new Error(`Error: ${response.status}`);
   }
-  const movie: Movie = await response.json();
+  return response.json();
+};
 
+/* FUNCTIONS */
+export const getMovieById = async (id: number): Promise<Movie> => {
+  const movie: Movie = await apiRequest(`/movie/${id}?language=en-US`);
   return movie;
 };
 
 export const getPopular = async (): Promise<MovieListResponse> => {
-  const url = `${baseUrl}/movie/popular?language=en-US`;
-
-  const response = await fetch(url, { headers: API_HEADERS });
-  if (!response.ok) {
-    throw new Error(`Error: ${response.status}`);
-  }
-  const movieListData: MovieListResponse = await response.json();
-
+  const movieListData: MovieListResponse = await apiRequest(`/movie/popular?language=en-US`);
   return movieListData;
 };
 
@@ -54,73 +47,34 @@ export const searchMovies = async (
   query: string,
   page: number
 ): Promise<MovieListResponse> => {
-  const url = `${baseUrl}/search/movie?query=${encodeURIComponent(
-    query
-  )}&language=en-US&page=${page}`;
-
-  const response = await fetch(url, { headers: API_HEADERS });
-  if (!response.ok) {
-    throw new Error(`Error: ${response.status}`);
-  }
-  const movieListData: MovieListResponse = await response.json();
-
+  const movieListData: MovieListResponse = await apiRequest(
+    `/search/movie?query=${encodeURIComponent(query)}&language=en-US&page=${page}`
+  );
   return movieListData;
 };
 
 export const getMovieVideos = async (
   movieId: number
 ): Promise<MovieVideoResponse> => {
-  const url = `${baseUrl}/movie/${movieId}/videos?language=en-US`;
-
-  const response = await fetch(url, { headers: API_HEADERS });
-  if (!response.ok) {
-    throw new Error(`Error: ${response.status}`);
-  }
-
-  const movieVideoData: MovieVideoResponse = await response.json();
-
+  const movieVideoData: MovieVideoResponse = await apiRequest(`/movie/${movieId}/videos?language=en-US`);
   return movieVideoData;
 };
 
 export const getMovieCredits = async (
   movieId: number
 ): Promise<CreditResponse> => {
-  const url = `${baseUrl}/movie/${movieId}/credits?language=en-US`;
-
-  const response = await fetch(url, { headers: API_HEADERS });
-  if (!response.ok) {
-    throw new Error(`Error: ${response.status}`);
-  }
-
-  const creditData: CreditResponse = await response.json();
-
+  const creditData: CreditResponse = await apiRequest(`/movie/${movieId}/credits?language=en-US`);
   return creditData;
 };
 
 export const getSimilar = async (
   movieId: number
 ): Promise<MovieListResponse> => {
-  const url = `${baseUrl}/movie/${movieId}/similar`;
-
-  const response = await fetch(url, { headers: API_HEADERS });
-  if (!response.ok) {
-    throw new Error(`Error: ${response.status}`);
-  }
-
-  const movieListData: MovieListResponse = await response.json();
-
+  const movieListData: MovieListResponse = await apiRequest(`/movie/${movieId}/similar`);
   return movieListData;
 };
 
 export const getTopRated = async (): Promise<MovieListResponse> => {
-  const url = `${baseUrl}/movie/top_rated`;
-
-  const response = await fetch(url, { headers: API_HEADERS });
-  if (!response.ok) {
-    throw new Error(`Error: ${response.status}`);
-  }
-
-  const movieListData: MovieListResponse = await response.json();
-
+  const movieListData: MovieListResponse = await apiRequest(`/movie/top_rated`);
   return movieListData;
 };
