@@ -1,12 +1,23 @@
 import styles from "./SearchPage.module.css";
 import { useSearchMovies } from "../../hooks/useSearchMovies";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { SearchBar } from "./SearchBar";
 import { MovieGrid } from "../../components/MovieGrid/MovieGrid";
 
 export const SearchPage = () => {
-  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialQuery = searchParams.get("q") || "";
+  const [searchQuery, setSearchQuery] = useState<string>(initialQuery);
   const { movies, loading, hasMore, loadMore } = useSearchMovies(searchQuery);
+
+  useEffect(() => {
+    if (searchQuery) {
+      setSearchParams({ q: searchQuery });
+    } else {
+      setSearchParams({});
+    }
+  }, [searchQuery, setSearchParams]);
 
   return (
     <div className={styles.searchPage}>
