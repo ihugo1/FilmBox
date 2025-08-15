@@ -1,5 +1,6 @@
 import styles from "./MovieVideoSection.module.css";
 import { useMovieTrailer } from "../../hooks/useMovieVideos";
+import { Spinner } from "../../components/Spinner/Spinner";
 
 interface MovieVideoSectionProps {
   movieId: number;
@@ -8,7 +9,12 @@ interface MovieVideoSectionProps {
 export const MovieVideoSection = ({ movieId }: MovieVideoSectionProps) => {
   const { trailer, loading, error } = useMovieTrailer(movieId);
 
-  if (loading) return <div>Loading trailer...</div>;
+  if (loading) return (
+    <div className={styles.loadingContainer}>
+      <Spinner size="medium" />
+      <p>Loading trailer...</p>
+    </div>
+  );
   if (error) return <div>Error loading trailer</div>;
   if (!trailer) return <div>No trailer available</div>;
 

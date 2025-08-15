@@ -69,6 +69,71 @@
   gap: var(--space-lg);
   background-color: var(--background-color);
 }
+
+.loadingContainer {
+  margin-top: 8vh;
+  height: 92vh;
+  background-color: var(--background-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loadingContent {
+  text-align: center;
+  color: var(--text-color-light);
+}
+
+.loadingContent h2 {
+  font-size: var(--font-size-2xl);
+  margin: var(--space-md) 0;
+}
+
+.loadingContent p {
+  font-size: var(--font-size-lg);
+  opacity: 0.8;
+  margin: 0;
+}
+
+.errorContainer {
+  margin-top: 8vh;
+  height: 92vh;
+  background-color: var(--background-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.errorContent {
+  text-align: center;
+  color: var(--text-color-light);
+}
+
+.errorContent h2 {
+  font-size: var(--font-size-2xl);
+  margin-bottom: var(--space-md);
+}
+
+.errorContent p {
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--space-lg);
+  opacity: 0.8;
+}
+
+.errorContent button {
+  background-color: var(--accent-color);
+  color: var(--text-color-light);
+  padding: var(--space-md) var(--space-xl);
+  border: none;
+  border-radius: var(--space-sm);
+  font-size: var(--font-size-md);
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.errorContent button:hover {
+  opacity: 0.8;
+}
 /* Responsive Design */
 @media (max-width: 1024px) {
   /* Tablet styles */

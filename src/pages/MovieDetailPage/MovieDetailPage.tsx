@@ -6,6 +6,7 @@ import { MovieVideoSection } from "./MovieVideoSection";
 import { MovieCreditSection } from "./MovieCreditSection";
 import { MovieGrid } from "../../components/MovieGrid/MovieGrid";
 import { useSimilarMovies } from "../../hooks/useSimilarMovies";
+import { Spinner } from "../../components/Spinner/Spinner";
 
 export const MovieDetailPage = () => {
   const { id } = useParams();
@@ -19,6 +20,31 @@ export const MovieDetailPage = () => {
 
   if (!id) {
     return <div>Movie not found</div>;
+  }
+
+  if (loading) {
+    return (
+      <div className={styles.loadingContainer}>
+        <div className={styles.loadingContent}>
+          <Spinner size="large" />
+          <h2>Loading movie...</h2>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className={styles.errorContainer}>
+        <div className={styles.errorContent}>
+          <h2>😔 Oops! Something went wrong</h2>
+          <p>We couldn't load this movie. Please try again later.</p>
+          <button onClick={() => window.location.reload()}>
+            Try Again
+          </button>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -73,7 +99,7 @@ export const MovieDetailPage = () => {
       <MovieCreditSection movieId={id ? parseInt(id, 10) : 0} />
       <section className={styles.similarSection}>
         <h3>You may also like to watch</h3>
-        <MovieGrid movies={similarMovies} loading={similarLoading} />
+        <MovieGrid movies={similarMovies} loading={similarLoading} error={similarError} />
       </section>
     </>
   );

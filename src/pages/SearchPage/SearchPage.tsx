@@ -9,7 +9,7 @@ export const SearchPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const initialQuery = searchParams.get("q") || "";
   const [searchQuery, setSearchQuery] = useState<string>(initialQuery);
-  const { movies, loading, hasMore, loadMore } = useSearchMovies(searchQuery);
+  const { movies, loading, error, hasMore, loadMore } = useSearchMovies(searchQuery);
 
   useEffect(() => {
     if (searchQuery) {
@@ -44,7 +44,7 @@ export const SearchPage = () => {
       )}
 
       {searchQuery.length >= 1 && (
-        <MovieGrid movies={movies} loading={loading} />
+        <MovieGrid movies={movies} loading={loading} error={error} />
       )}
 
       {hasMore && (

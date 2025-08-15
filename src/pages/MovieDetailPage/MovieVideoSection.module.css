@@ -20,6 +20,16 @@
   border: none;
 }
 
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2xl);
+  gap: var(--space-md);
+  color: var(--text-color-light);
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
   .movieVideoSection{
@@ -41,5 +51,7 @@
 
 @media (max-width: 480px) {
   /* Small mobile styles */
-  
+  .loadingContainer {
+    padding: var(--space-lg);
+  }
 }

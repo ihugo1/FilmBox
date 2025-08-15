@@ -10,12 +10,10 @@ export type MovieListResponse = {
   total_pages: number;
   total_results: number;
 };
-
 export type MovieVideoResponse = {
   id: number;
   results: MovieVideo[];
 };
-
 export type CreditResponse = {
   id: number;
   cast: CastMember[];

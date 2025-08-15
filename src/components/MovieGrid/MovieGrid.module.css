@@ -6,3 +6,35 @@
   flex-wrap: wrap;
   gap: var(--space-xl);
 }
+
+.loadingContainer,
+.errorContainer,
+.emptyContainer {
+  width: 100%;
+  padding: var(--space-2xl);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loadingContent,
+.errorContent,
+.emptyContent {
+  text-align: center;
+  color: var(--text-color-light);
+}
+
+.loadingContent h3,
+.errorContent h3,
+.emptyContent h3 {
+  font-size: var(--font-size-xl);
+  margin: var(--space-sm) 0;
+}
+
+.loadingContent p,
+.errorContent p,
+.emptyContent p {
+  font-size: var(--font-size-md);
+  opacity: 0.8;
+  margin: 0;
+}

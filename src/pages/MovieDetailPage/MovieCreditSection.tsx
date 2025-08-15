@@ -1,6 +1,7 @@
 import styles from "./MovieCreditSection.module.css"
 import { useCreditData } from "../../hooks/useCreditData"
 import { API_CONFIG } from "../../config/api";
+import { Spinner } from "../../components/Spinner/Spinner";
 
 interface MovieCreditSectionProps {
   movieId: number;
@@ -9,7 +10,12 @@ interface MovieCreditSectionProps {
 export const MovieCreditSection = ({ movieId }: MovieCreditSectionProps) => {
   const { castMembers, director, loading, error } = useCreditData(movieId);
 
-  if (loading) return <div>Loading credits...</div>;
+  if (loading) return (
+    <div className={styles.loadingContainer}>
+      <Spinner size="medium" />
+      <p>Loading credits...</p>
+    </div>
+  );
   if (error) return <div>Error loading credits: {error}</div>;
 
   return (
