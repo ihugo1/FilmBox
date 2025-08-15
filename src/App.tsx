@@ -13,7 +13,7 @@ const MovieDetailWrapper = () => {
 
 export function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/FilmBox">
       <ScrollToTop />
       <Navbar />
       <Routes>

@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./Hero.module.css";
 import type { Movie } from "../../types/movie";
 import { API_CONFIG } from "../../config/api";
