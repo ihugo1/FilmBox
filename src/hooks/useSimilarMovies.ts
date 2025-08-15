@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
+import { getSimilar } from "../services/movieService";
 import type { Movie } from "../types/movie";
-import { getPopular } from "../services/movieService";
 
-export const usePopularMovies = () => {
-  const [movies, setMovies] = useState<Movie[]>([]);
+export const useSimilarMovies = (movieId: number) => {
+  const [similarMovies, setSimilarMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -11,9 +11,9 @@ export const usePopularMovies = () => {
     const fetchMovies = async () => {
       setLoading(true);
       setError(null);
-      try {
-        const data = await getPopular();
-        setMovies(data.results.slice(0, 10));
+      try{
+        const data = await getSimilar(movieId);
+        setSimilarMovies(data.results.slice(0, 5));
       } catch (err) {
         setError(err instanceof Error ? err.message : "Error loading movies");
       } finally {
@@ -22,7 +22,7 @@ export const usePopularMovies = () => {
     };
 
     fetchMovies();
-  }, []);
+  }, [movieId]);
 
-  return { movies, loading, error };
-};
+  return { similarMovies, loading, error }
+}

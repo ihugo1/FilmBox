@@ -11,7 +11,7 @@ export const HomePage = () => {
       <Hero movie={movies[0]}/>
       <section className={styles.popularSection}>
         <h2>Popular right now</h2>
-        <MovieGrid movies={movies.slice(0, 10)} loading={loading}/>
+        <MovieGrid movies={movies} loading={loading}/>
       </section>
     </div>
   )

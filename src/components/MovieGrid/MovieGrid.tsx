@@ -9,10 +9,6 @@ interface MovieGridProps {
 }
 
 export const MovieGrid = React.memo(({ movies, loading }: MovieGridProps) => {
-  if (loading && movies.length === 0) {
-    return <div>Loading movies...</div>;
-  }
-
   return (
     <div className={styles.movieGrid}>
       {movies.map((movie) => (

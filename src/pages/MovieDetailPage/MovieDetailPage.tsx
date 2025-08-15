@@ -4,11 +4,18 @@ import { useGetMovieById } from "../../hooks/useGetMovieById";
 import { API_CONFIG } from "../../config/api";
 import { MovieVideoSection } from "./MovieVideoSection";
 import { MovieCreditSection } from "./MovieCreditSection";
+import { MovieGrid } from "../../components/MovieGrid/MovieGrid";
+import { useSimilarMovies } from "../../hooks/useSimilarMovies";
 
 export const MovieDetailPage = () => {
   const { id } = useParams();
 
   const { movie, loading, error } = useGetMovieById(id ? parseInt(id, 10) : 0);
+  const {
+    similarMovies,
+    loading: similarLoading,
+    error: similarError,
+  } = useSimilarMovies(id ? parseInt(id, 10) : 0);
 
   if (!id) {
     return <div>Movie not found</div>;
@@ -64,6 +71,10 @@ export const MovieDetailPage = () => {
       </div>
       <MovieVideoSection movieId={id ? parseInt(id, 10) : 0} />
       <MovieCreditSection movieId={id ? parseInt(id, 10) : 0} />
+      <section className={styles.similarSection}>
+        <h3>You may also like to watch</h3>
+        <MovieGrid movies={similarMovies} loading={similarLoading} />
+      </section>
     </>
   );
 };
