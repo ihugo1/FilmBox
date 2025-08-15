@@ -24,6 +24,12 @@
   cursor: pointer;
 }
 
+.logo::before {
+  content: '🎬';
+  font-size: var(--font-size-2xl);
+  margin-right: var(--space-xs);
+}
+
 .logo:hover {
   color: var(--text-color-light);
   transform: scale(1.05);
@@ -35,6 +41,21 @@
   justify-content: center;
   align-items: center;
   gap: var(--space-lg);
+}
+
+.navBarLinks li {
+  list-style: none;
+}
+
+.navBarLinks a {
+  color: var(--text-color-light);
+  text-decoration: none;
+  font-size: var(--font-size-md);
+  transition: color 0.3s ease;
+}
+
+.navBarLinks a:hover {
+  color: var(--accent-color);
 }
 
 .searchBarContainer {

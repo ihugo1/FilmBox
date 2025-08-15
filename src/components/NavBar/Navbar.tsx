@@ -1,6 +1,6 @@
 import styles from "./NavBar.module.css";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -15,11 +15,11 @@ export const Navbar = () => {
 
   return (
     <div className={styles.navBar}>
-      <h1 className={styles.logo}>FilmBox</h1>
+      <Link to="/" className={styles.logo}>FilmBox</Link>
       <ul className={styles.navBarLinks}>
-        <li>Home</li>
-        <li>Movies</li>
-        <li>About</li>
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/search">Movies</Link></li>
+        <li><Link to="/about">About</Link></li>
       </ul>
       <div className={styles.searchBarContainer}>
         <input 

@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 import { Navbar } from "./components/NavBar/Navbar";
+import { Footer } from "./components/Footer/Footer";
 import { HomePage } from "./pages/HomePage/HomePage";
 import { SearchPage } from "./pages/SearchPage/SearchPage";
 import { MovieDetailPage } from "./pages/MovieDetailPage/MovieDetailPage";
@@ -20,6 +21,7 @@ export function App() {
         <Route path="/search" element={<SearchPage />} />
         <Route path="/movie/:id" element={<MovieDetailWrapper />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }

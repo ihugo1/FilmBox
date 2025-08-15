@@ -69,6 +69,7 @@ ul, ol {
   /* Color */
   --background-color: #1a2731;
   --background-color-light: #2b373f; 
+  --background-color-dark: #131d24; 
   --accent-color: #017e35;
   --text-color-light: #d3d3d3;
   --text-color-dark: #1d1d1d;
