@@ -8,6 +8,7 @@ export type Movie = {
   title: string;
   original_language: string;
   genres: Genre[];
+  runtime: number;
   overview: string;
   release_date: string;
   vote_average: number;
