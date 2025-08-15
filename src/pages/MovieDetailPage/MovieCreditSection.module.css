@@ -1,0 +1,67 @@
+.movieCreditSection{
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: var(--space-lg);
+  background-color: var(--background-color);
+}
+.directorContainer{
+  width: 150px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.directorContainer img{
+  height: 80%;
+  width: auto;
+  object-fit: contain;
+}
+.directorInfoContainer{
+  height: 20%;
+  text-align: center;
+}
+.directorName{
+  font-size: var(--font-size-md);
+}
+.directorRole{
+  font-size: var(--font-size-sm);
+  opacity: 50%;
+}
+.castContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+}
+.castList{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-md);
+}
+.castMemberContainer{
+  width: 150px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+}
+.castMemberContainer img{
+  height: 80%;
+  width: auto;
+  object-fit: contain;
+}
+.castInfoContainer{
+  height: 20%;
+  text-align: center;
+}
+.castName{
+  font-size: var(--font-size-md);
+}
+.castCharacter{
+  font-size: var(--font-size-sm);
+  opacity: 50%;
+}

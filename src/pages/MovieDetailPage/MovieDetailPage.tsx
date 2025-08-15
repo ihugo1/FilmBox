@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useGetMovieById } from "../../hooks/useGetMovieById";
 import { API_CONFIG } from "../../config/api";
 import { MovieVideoSection } from "./MovieVideoSection";
+import { MovieCreditSection } from "./MovieCreditSection";
 
 export const MovieDetailPage = () => {
   const { id } = useParams();
@@ -62,6 +63,7 @@ export const MovieDetailPage = () => {
         </div>
       </div>
       <MovieVideoSection movieId={id ? parseInt(id, 10) : 0} />
+      <MovieCreditSection movieId={id ? parseInt(id, 10) : 0} />
     </>
   );
 };

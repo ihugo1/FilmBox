@@ -1,6 +1,7 @@
 import { API_CONFIG, API_HEADERS } from "../config/api";
 import type { Movie } from "../types/movie";
 import type { MovieVideo } from "../types/video";
+import type { CrewMember, CastMember } from "../types/creditsTypes";
 
 /**
  * Response structure for TMDB API endpoints that return paginated movie lists
@@ -20,6 +21,12 @@ export type MovieListResponse = {
 export type MovieVideoResponse = {
   id: number;
   results: MovieVideo[];
+}
+
+export type CreditResponse = {
+  id: number;
+  cast: CastMember[];
+  crew: CrewMember[];
 }
 
 /**
@@ -71,7 +78,7 @@ export const searchMovies = async (query: string, page: number): Promise<MovieLi
 }
 
 export const getMovieVideos = async (movieId: number): Promise<MovieVideoResponse> => {
-  const url = `${API_CONFIG.baseUrl}/movie/${movieId}/videos`;
+  const url = `${API_CONFIG.baseUrl}/movie/${movieId}/videos?language=en-US`;
 
   const response = await fetch(url, { headers: API_HEADERS });
   if (!response.ok) {
@@ -81,4 +88,17 @@ export const getMovieVideos = async (movieId: number): Promise<MovieVideoRespons
   const movieVideoData: MovieVideoResponse = await response.json();
 
   return movieVideoData;
+}
+
+export const getMovieCredits = async (movieId: number): Promise<CreditResponse> => {
+  const url = `${API_CONFIG.baseUrl}/movie/${movieId}/credits?language=en-US`;
+
+  const response = await fetch(url, { headers: API_HEADERS });
+  if (!response.ok) {
+    throw new Error(`Error: ${response.status}`);
+  }
+
+  const creditData: CreditResponse = await response.json();
+
+  return creditData;
 }
