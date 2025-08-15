@@ -3,7 +3,7 @@
 }
 
 .popularSection, .topRatedSection {
-  background-color: var(--background-color);
+  background-color: var(--background-color-light);
   padding: var(--space-3xl) var(--space-xl);
   min-height: 50vh;
 }
