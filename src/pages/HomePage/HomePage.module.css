@@ -2,13 +2,13 @@
   min-height: 100vh;
 }
 
-.popularSection {
+.popularSection, .topRatedSection {
   background-color: var(--background-color);
   padding: var(--space-3xl) var(--space-xl);
   min-height: 50vh;
 }
 
-.popularSection h2 {
+.popularSection h2, .topRatedSection h2 {
   color: var(--text-color-light);
   font-size: var(--font-size-3xl);
   font-weight: 700;

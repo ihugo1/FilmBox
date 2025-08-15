@@ -3,18 +3,11 @@ import type { Movie } from "../types/movie";
 import type { MovieVideo } from "../types/video";
 import type { CrewMember, CastMember } from "../types/creditsTypes";
 
-/**
- * Response structure for TMDB API endpoints that return paginated movie lists
- * @interface MovieListResponse
- */
+/* RESPONSE TYPES */
 export type MovieListResponse = {
-  /** Current page number */
   page: number;
-  /** Array of movies in the current page */
   results: Movie[];
-  /** Total number of pages available */
   total_pages: number;
-  /** Total number of movies across all pages */
   total_results: number;
 };
 
@@ -29,14 +22,12 @@ export type CreditResponse = {
   crew: CrewMember[];
 };
 
-/**
- * Fetches detailed information for a specific movie by its ID
- * @param id - The TMDB movie ID
- * @returns Promise that resolves to a Movie object with full details
- * @throws Error when the API request fails or movie is not found
- */
+/* BASE URL */
+const baseUrl = API_CONFIG.baseUrl;
+
+/* FUNCTIONS */
 export const getMovieById = async (id: number): Promise<Movie> => {
-  const url = `${API_CONFIG.baseUrl}/movie/${id}?language=en-US`;
+  const url = `${baseUrl}/movie/${id}?language=en-US`;
 
   const response = await fetch(url, { headers: API_HEADERS });
   if (!response.ok) {
@@ -47,13 +38,8 @@ export const getMovieById = async (id: number): Promise<Movie> => {
   return movie;
 };
 
-/**
- * Fetches a list of popular movies from TMDB
- * @returns Promise that resolves to MovieListResponse containing popular movies with pagination info
- * @throws Error when the API request fails
- */
 export const getPopular = async (): Promise<MovieListResponse> => {
-  const url = `${API_CONFIG.baseUrl}/movie/popular?language=en-US`;
+  const url = `${baseUrl}/movie/popular?language=en-US`;
 
   const response = await fetch(url, { headers: API_HEADERS });
   if (!response.ok) {
@@ -68,7 +54,7 @@ export const searchMovies = async (
   query: string,
   page: number
 ): Promise<MovieListResponse> => {
-  const url = `${API_CONFIG.baseUrl}/search/movie?query=${encodeURIComponent(
+  const url = `${baseUrl}/search/movie?query=${encodeURIComponent(
     query
   )}&language=en-US&page=${page}`;
 
@@ -84,7 +70,7 @@ export const searchMovies = async (
 export const getMovieVideos = async (
   movieId: number
 ): Promise<MovieVideoResponse> => {
-  const url = `${API_CONFIG.baseUrl}/movie/${movieId}/videos?language=en-US`;
+  const url = `${baseUrl}/movie/${movieId}/videos?language=en-US`;
 
   const response = await fetch(url, { headers: API_HEADERS });
   if (!response.ok) {
@@ -99,7 +85,7 @@ export const getMovieVideos = async (
 export const getMovieCredits = async (
   movieId: number
 ): Promise<CreditResponse> => {
-  const url = `${API_CONFIG.baseUrl}/movie/${movieId}/credits?language=en-US`;
+  const url = `${baseUrl}/movie/${movieId}/credits?language=en-US`;
 
   const response = await fetch(url, { headers: API_HEADERS });
   if (!response.ok) {
@@ -111,8 +97,23 @@ export const getMovieCredits = async (
   return creditData;
 };
 
-export const getSimilar = async (movieId: number): Promise<MovieListResponse> => {
-  const url = `${API_CONFIG.baseUrl}/movie/${movieId}/similar`;
+export const getSimilar = async (
+  movieId: number
+): Promise<MovieListResponse> => {
+  const url = `${baseUrl}/movie/${movieId}/similar`;
+
+  const response = await fetch(url, { headers: API_HEADERS });
+  if (!response.ok) {
+    throw new Error(`Error: ${response.status}`);
+  }
+
+  const movieListData: MovieListResponse = await response.json();
+
+  return movieListData;
+};
+
+export const getTopRated = async (): Promise<MovieListResponse> => {
+  const url = `${baseUrl}/movie/top_rated`;
 
   const response = await fetch(url, { headers: API_HEADERS });
   if (!response.ok) {
