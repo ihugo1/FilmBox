@@ -5,6 +5,7 @@
   justify-content: center;
   flex-wrap: wrap;
   gap: var(--space-xl);
+  padding: var(--space-md);
 }
 
 .loadingContainer,

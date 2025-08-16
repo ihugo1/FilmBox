@@ -7,17 +7,14 @@ import { MovieCreditSection } from "./MovieCreditSection";
 import { MovieGrid } from "../../components/MovieGrid/MovieGrid";
 import { useSimilarMovies } from "../../hooks/useSimilarMovies";
 import { Spinner } from "../../components/Spinner/Spinner";
-import altbg from '/flat-background.png';
+import altbg from "/flat-background.png";
+import posterPlaceHolder from "./../../../public/poster-placeholder.png";
 
 export const MovieDetailPage = () => {
   const { id } = useParams();
 
   const { movie, loading, error } = useGetMovieById(id ? parseInt(id, 10) : 0);
-  const {
-    similarMovies,
-    loading: similarLoading,
-    error: similarError,
-  } = useSimilarMovies(id ? parseInt(id, 10) : 0);
+  const { similarMovies, loading: similarLoading, error: similarError,} = useSimilarMovies(id ? parseInt(id, 10) : 0);
 
   if (!id) {
     return <div>Movie not found</div>;
@@ -29,7 +26,6 @@ export const MovieDetailPage = () => {
         <div className={styles.loadingContent}>
           <Spinner size="large" />
           <h2>Loading movie...</h2>
-
         </div>
       </div>
     );
@@ -41,9 +37,7 @@ export const MovieDetailPage = () => {
         <div className={styles.errorContent}>
           <h2>😔 Oops! Something went wrong</h2>
           <p>We couldn't load this movie. Please try again later.</p>
-          <button onClick={() => window.location.reload()}>
-            Try Again
-          </button>
+          <button onClick={() => window.location.reload()}>Try Again</button>
         </div>
       </div>
     );
@@ -54,17 +48,22 @@ export const MovieDetailPage = () => {
       <div className={styles.movieDetailPage}>
         <div className={styles.background}>
           <img
-            src={movie?.backdrop_path 
-              ? `${API_CONFIG.imageBaseUrl}${movie.backdrop_path}`
-              : altbg
+            src={
+              movie?.backdrop_path
+                ? `${API_CONFIG.imageBaseUrl}${movie.backdrop_path}`
+                : altbg
             }
             alt="Movie background"
           />
         </div>
         <div className={styles.content}>
           <img
-            src={`${API_CONFIG.imageBaseUrl}/${movie?.poster_path}`}
-            alt=""
+            src={
+              movie?.poster_path
+              ? `${API_CONFIG.imageBaseUrl}/${movie?.poster_path}`
+              : posterPlaceHolder
+            }
+            alt={movie?.title}
           />
           <div className={styles.movieInfo}>
             <h3 className={styles.title}>
@@ -104,7 +103,11 @@ export const MovieDetailPage = () => {
       <MovieCreditSection movieId={id ? parseInt(id, 10) : 0} />
       <section className={styles.similarSection}>
         <h3>You may also like to watch</h3>
-        <MovieGrid movies={similarMovies} loading={similarLoading} error={similarError} />
+        <MovieGrid
+          movies={similarMovies}
+          loading={similarLoading}
+          error={similarError}
+        />
       </section>
     </>
   );
