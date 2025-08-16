@@ -17,15 +17,22 @@ export const useMovieTrailer = (movieId: number) => {
         const data = await getMovieVideos(movieId);
         
         if (isMounted) {
-          // Filter for trailer
-          const officialTrailer = data.results.find(
-            (video) =>
-              video.type === "Trailer" && video.site === "YouTube" && video.official
-          );
-          
-          const anyTrailer = data.results.find(
-            (video) => video.type === "Trailer" && video.site === "YouTube"
-          );
+          // Single iteration optimization
+          let officialTrailer = null;
+          let anyTrailer = null;
+
+          for (const video of data.results) {
+            if (video.type === "Trailer" && video.site === "YouTube") {
+              if (video.official && !officialTrailer) {
+                officialTrailer = video;
+              }
+              if (!anyTrailer) {
+                anyTrailer = video;
+              }
+              // Early exit if we found official trailer
+              if (officialTrailer) break;
+            }
+          }
           
           setTrailer(officialTrailer || anyTrailer || null);
         }

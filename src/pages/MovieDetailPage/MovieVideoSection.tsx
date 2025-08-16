@@ -1,5 +1,5 @@
 import styles from "./MovieVideoSection.module.css";
-import { useMovieTrailer } from "../../hooks/useMovieVideos";
+import { useMovieTrailer } from "../../hooks/useMovieTrailer";
 import { Spinner } from "../../components/Spinner/Spinner";
 
 interface MovieVideoSectionProps {
