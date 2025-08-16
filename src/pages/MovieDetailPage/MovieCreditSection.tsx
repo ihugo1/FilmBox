@@ -2,6 +2,7 @@ import styles from "./MovieCreditSection.module.css"
 import { useCreditData } from "../../hooks/useCreditData"
 import { API_CONFIG } from "../../config/api";
 import { Spinner } from "../../components/Spinner/Spinner";
+import placeholderImage from '/photo-placeholder.jpg';
 
 interface MovieCreditSectionProps {
   movieId: number;
@@ -9,6 +10,12 @@ interface MovieCreditSectionProps {
 
 export const MovieCreditSection = ({ movieId }: MovieCreditSectionProps) => {
   const { castMembers, director, loading, error } = useCreditData(movieId);
+
+  const getProfileImage = (profilePath?: string | null) => {
+    return profilePath 
+      ? `${API_CONFIG.imageBaseUrl}${profilePath}`
+      : placeholderImage;
+  };
 
   if (loading) return (
     <div className={styles.loadingContainer}>
@@ -22,7 +29,7 @@ export const MovieCreditSection = ({ movieId }: MovieCreditSectionProps) => {
     <div className={styles.movieCreditSection}>
       <div className={styles.directorContainer}>
         <h3>Director</h3>
-        <img src={`${API_CONFIG.imageBaseUrl}/${director?.profile_path}`} alt={director?.name} />
+        <img src={getProfileImage(director?.profile_path)} alt={director?.name} />
         <div className={styles.directorInfoContainer}>
           <p className={styles.directorName}>{director?.name}</p>
         </div>
@@ -34,7 +41,7 @@ export const MovieCreditSection = ({ movieId }: MovieCreditSectionProps) => {
           {castMembers.map(member => (
             <li key={member.name} className={styles.castMemberContainer}>
               <img
-                src={`${API_CONFIG.imageBaseUrl}/${member.profile_path}`}
+                src={getProfileImage(member.profile_path)}
                 alt={member.name}
                 className={styles.castImage}
               />

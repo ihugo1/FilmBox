@@ -8,20 +8,32 @@ export const usePopularMovies = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    let isMounted = true;
+
     const fetchMovies = async () => {
       setLoading(true);
       setError(null);
       try {
         const data = await getPopular();
-        setMovies(data.results.slice(0, 10));
+        if (isMounted) {
+          setMovies(data.results.slice(0, 10));
+        }
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Error loading movies");
+        if (isMounted) {
+          setError(err instanceof Error ? err.message : "Error loading movies");
+        }
       } finally {
-        setLoading(false);
+        if (isMounted) {
+          setLoading(false);
+        }
       }
     };
 
     fetchMovies();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   return { movies, loading, error };

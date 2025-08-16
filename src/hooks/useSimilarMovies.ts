@@ -8,20 +8,32 @@ export const useSimilarMovies = (movieId: number) => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    let isMounted = true;
+
     const fetchMovies = async () => {
       setLoading(true);
       setError(null);
       try{
         const data = await getSimilar(movieId);
-        setSimilarMovies(data.results.slice(0, 5));
+        if (isMounted) {
+          setSimilarMovies(data.results.slice(0, 5));
+        }
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Error loading movies");
+        if (isMounted) {
+          setError(err instanceof Error ? err.message : "Error loading movies");
+        }
       } finally {
-        setLoading(false);
+        if (isMounted) {
+          setLoading(false);
+        }
       }
     };
 
     fetchMovies();
+
+    return () => {
+      isMounted = false;
+    };
   }, [movieId]);
 
   return { similarMovies, loading, error }

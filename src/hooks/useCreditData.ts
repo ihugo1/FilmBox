@@ -10,24 +10,36 @@ export const useCreditData = (movieId: number) => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    let isMounted = true;
+
     const fetchCredits = async () => {
       setLoading(true);
       setError(null);
       try {
         const data = await getMovieCredits(movieId);
-        // Filter cast (first 6 members)
-        setCastMember(data.cast.slice(0, 6));
-        // Find director
-        const movieDirector = data.crew.find(member => member.job === "Director");
-        setDirector(movieDirector);
+        if (isMounted) {
+          // Filter cast (first 6 members)
+          setCastMember(data.cast.slice(0, 6));
+          // Find director
+          const movieDirector = data.crew.find(member => member.job === "Director");
+          setDirector(movieDirector);
+        }
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Error loading credits");
+        if (isMounted) {
+          setError(err instanceof Error ? err.message : "Error loading credits");
+        }
       } finally {
-        setLoading(false);
+        if (isMounted) {
+          setLoading(false);
+        }
       }
     };
 
     fetchCredits();
+
+    return () => {
+      isMounted = false;
+    };
   }, [movieId]);
 
   return { castMembers, director, loading, error };

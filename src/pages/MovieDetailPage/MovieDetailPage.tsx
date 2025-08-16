@@ -7,6 +7,7 @@ import { MovieCreditSection } from "./MovieCreditSection";
 import { MovieGrid } from "../../components/MovieGrid/MovieGrid";
 import { useSimilarMovies } from "../../hooks/useSimilarMovies";
 import { Spinner } from "../../components/Spinner/Spinner";
+import altbg from '/flat-background.png';
 
 export const MovieDetailPage = () => {
   const { id } = useParams();
@@ -28,6 +29,7 @@ export const MovieDetailPage = () => {
         <div className={styles.loadingContent}>
           <Spinner size="large" />
           <h2>Loading movie...</h2>
+
         </div>
       </div>
     );
@@ -52,8 +54,11 @@ export const MovieDetailPage = () => {
       <div className={styles.movieDetailPage}>
         <div className={styles.background}>
           <img
-            src={`${API_CONFIG.imageBaseUrl}/${movie?.backdrop_path}`}
-            alt=""
+            src={movie?.backdrop_path 
+              ? `${API_CONFIG.imageBaseUrl}${movie.backdrop_path}`
+              : altbg
+            }
+            alt="Movie background"
           />
         </div>
         <div className={styles.content}>

@@ -8,20 +8,32 @@ export const useGetMovieById = (movieId: number) => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(()=>{
+    let isMounted = true;
+
     const fetchMovie = async () => {
       setLoading(true);
       setError(null);
       try{
         const data = await getMovieById(movieId);
-        setMovie(data);
+        if (isMounted) {
+          setMovie(data);
+        }
       } catch (err){
-        setError(err instanceof Error ? err.message : "Error loading movie");
+        if(isMounted){
+          setError(err instanceof Error ? err.message : "Error loading movie");
+        }
       } finally{
-        setLoading(false);
+        if(isMounted){
+          setLoading(false);
+        }
       }
     }
 
     fetchMovie();
+
+    return () => {
+      isMounted = false;
+    };
   }, [movieId])
 
   return { movie, loading, error }
