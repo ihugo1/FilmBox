@@ -2,7 +2,6 @@ import styles from "./SearchPage.module.css";
 import { useSearchMovies } from "../../hooks/useSearchMovies";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { SearchBar } from "./SearchBar";
 import { MovieGrid } from "../../components/MovieGrid/MovieGrid";
 
 export const SearchPage = () => {
@@ -21,7 +20,14 @@ export const SearchPage = () => {
 
   return (
     <div className={styles.searchPage}>
-      <SearchBar value={searchQuery} onChange={setSearchQuery} />
+      <div className={styles.searchBar}>
+        <input
+          value={searchQuery}
+          type="text"
+          placeholder="Search for movies..."
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+      </div>
 
       {searchQuery.length < 2 && movies.length === 0 && (
         <div className={styles.emptyState}>

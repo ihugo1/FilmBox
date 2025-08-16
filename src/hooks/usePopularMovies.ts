@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { Movie } from "../types/movie";
+import type { Movie } from "../types";
 import { getPopular } from "../services/movieService";
 
 export const usePopularMovies = () => {

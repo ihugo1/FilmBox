@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { getMovieCredits } from "../services/movieService";
-import type { CastMember } from "../types/creditsTypes";
-import type { CrewMember } from "../types/creditsTypes";
+import type { CastMember, CrewMember } from "../types";
 
 export const useCreditData = (movieId: number) => {
   const [castMembers, setCastMember] = useState<CastMember[]>([]);

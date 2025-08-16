@@ -1,4 +1,4 @@
-import type { Movie } from "../types/movie";
+import type { Movie } from "../types";
 import { searchMovies } from "../services/movieService";
 import { useEffect, useState } from "react";
 

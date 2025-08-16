@@ -1,6 +1,6 @@
 import styles from "./MovieCard.module.css";
 import { Link } from "react-router-dom";
-import type { Movie } from "../../types/movie";
+import type { Movie } from "../../types";
 import { API_CONFIG } from "../../config/api";
 
 interface MovieCardProps {

@@ -1,7 +1,5 @@
 import { API_CONFIG, API_HEADERS } from "../config/api";
-import type { Movie } from "../types/movie";
-import type { MovieVideo } from "../types/video";
-import type { CrewMember, CastMember } from "../types/creditsTypes";
+import type { Movie, MovieVideo, CrewMember, CastMember } from "../types";
 
 /* RESPONSE TYPES */
 export type MovieListResponse = {

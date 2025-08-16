@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getTopRated } from "../services/movieService";
-import type { Movie } from "../types/movie";
+import type { Movie } from "../types";
 
 export const useTopRatedMovies = () => {
   const [movies, setMovies] = useState<Movie[]>([]);

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import type { MovieVideo } from "../types/video";
+import type { MovieVideo } from "../types";
 import { getMovieVideos } from "../services/movieService"
 
 export const useMovieTrailer = (movieId: number) => {

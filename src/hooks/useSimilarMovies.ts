@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getSimilar } from "../services/movieService";
-import type { Movie } from "../types/movie";
+import type { Movie } from "../types";
 
 export const useSimilarMovies = (movieId: number) => {
   const [similarMovies, setSimilarMovies] = useState<Movie[]>([]);
