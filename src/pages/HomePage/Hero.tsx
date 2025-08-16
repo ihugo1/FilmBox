@@ -1,6 +1,7 @@
 import styles from "./Hero.module.css";
 import type { Movie } from "../../types";
 import { API_CONFIG } from "../../config/api";
+import fallbackBg from '/flat-background.png';
 
 interface HeroProps {
   movie?: Movie;
@@ -8,12 +9,12 @@ interface HeroProps {
 
 export const Hero = ({ movie }: HeroProps) => {
   const backgroundUrl = movie?.backdrop_path
-    ? `${API_CONFIG.imageBaseUrl}${movie?.backdrop_path}`
-    : "";
+    ? `${API_CONFIG.imageBaseUrl}${movie.backdrop_path}`
+    : fallbackBg;
 
   return (
     <div className={styles.hero}>
-      <img className={styles.background} src={backgroundUrl} />
+      <img className={styles.background} src={backgroundUrl} alt="Hero background" />
       <div className={styles.content}>
         <div className={styles.movieInfo}>
           <h1 className={styles.title}>
