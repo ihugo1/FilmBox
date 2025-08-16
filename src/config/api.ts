@@ -9,4 +9,12 @@ export const API_HEADERS = {
   "Content-Type": "application/json",
 } as const;
 
+export const IMAGE_SIZES = {
+  poster: "w342",
+  backdrop: "w1280",
+  profile: "w185"
+} as const;
 
+export const getImageUrl = (path: string, type: keyof typeof IMAGE_SIZES) => {
+  return `https://image.tmdb.org/t/p/${IMAGE_SIZES[type]}${path}`;
+};

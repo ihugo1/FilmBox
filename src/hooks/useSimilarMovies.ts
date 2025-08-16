@@ -3,7 +3,7 @@ import { getSimilar } from "../services/movieService";
 import type { Movie } from "../types";
 
 export const useSimilarMovies = (movieId: number) => {
-  const [similarMovies, setSimilarMovies] = useState<Movie[]>([]);
+  const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -13,10 +13,10 @@ export const useSimilarMovies = (movieId: number) => {
     const fetchMovies = async () => {
       setLoading(true);
       setError(null);
-      try{
+      try {
         const data = await getSimilar(movieId);
         if (isMounted) {
-          setSimilarMovies(data.results.slice(0, 5));
+          setMovies(data.results.slice(0, 5));
         }
       } catch (err) {
         if (isMounted) {
@@ -36,5 +36,5 @@ export const useSimilarMovies = (movieId: number) => {
     };
   }, [movieId]);
 
-  return { similarMovies, loading, error }
-}
+  return { movies, loading, error };
+};

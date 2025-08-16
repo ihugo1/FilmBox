@@ -1,30 +1,34 @@
 import styles from "./Hero.module.css";
 import type { Movie } from "../../types";
-import { API_CONFIG } from "../../config/api";
-import fallbackBg from '/flat-background.png';
+import { getImageUrl } from "../../config/api";
+import backgroundPlaceholder from '/flat-background.png';
 
 interface HeroProps {
   movie?: Movie;
 }
 
 export const Hero = ({ movie }: HeroProps) => {
-  const backgroundUrl = movie?.backdrop_path
-    ? `${API_CONFIG.imageBaseUrl}${movie.backdrop_path}`
-    : fallbackBg;
-
   return (
     <div className={styles.hero}>
-      <img className={styles.background} src={backgroundUrl} alt="Hero background" />
+
+      <img 
+        className={styles.background} 
+        src={
+          movie?.backdrop_path 
+            ? getImageUrl(movie.backdrop_path, "backdrop") 
+            : backgroundPlaceholder
+        }
+        alt="Hero background" 
+      />
+
       <div className={styles.content}>
         <div className={styles.movieInfo}>
           <h1 className={styles.title}>
             {movie?.title || "Welcome to FilmBox"}
           </h1>
           <p className={styles.overview}>
-            {movie?.overview ||
-              "Discover and explore movies from around the world"}
+            {movie?.overview || "Discover and explore movies from around the world"}
           </p>
-
           <div className={styles.movieDetails}>
             {movie?.release_date && (
               <span className={styles.year}>
@@ -38,6 +42,7 @@ export const Hero = ({ movie }: HeroProps) => {
             )}
           </div>
         </div>
+
         <button>Go to movie</button>
       </div>
     </div>

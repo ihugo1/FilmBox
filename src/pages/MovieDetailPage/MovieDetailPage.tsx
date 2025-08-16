@@ -1,20 +1,26 @@
 import styles from "./MovieDatailPage.module.css";
 import { useParams } from "react-router-dom";
-import { useGetMovieById } from "../../hooks/useGetMovieById";
-import { API_CONFIG } from "../../config/api";
+import { getImageUrl } from "../../config/api";
 import { MovieVideoSection } from "./MovieVideoSection";
 import { MovieCreditSection } from "./MovieCreditSection";
 import { MovieGrid } from "../../components/MovieGrid/MovieGrid";
+import { useGetMovieById } from "../../hooks/useGetMovieById";
 import { useSimilarMovies } from "../../hooks/useSimilarMovies";
 import { Spinner } from "../../components/Spinner/Spinner";
-import altbg from "/flat-background.png";
+import backdropPlaceHolder from "/flat-background.png";
 import posterPlaceHolder from "./../../../public/poster-placeholder.png";
 
 export const MovieDetailPage = () => {
   const { id } = useParams();
 
-  const { movie, loading, error } = useGetMovieById(id ? parseInt(id, 10) : 0);
-  const { similarMovies, loading: similarLoading, error: similarError,} = useSimilarMovies(id ? parseInt(id, 10) : 0);
+  const movieId = (id ? parseInt(id, 10): 0);
+
+  const { movie, loading, error } = useGetMovieById(movieId);
+  const { 
+    movies: similarMovies, 
+    loading: similarMoviesLoading, 
+    error: similarMoviesError,
+  } = useSimilarMovies(movieId);
 
   if (!id) {
     return <div>Movie not found</div>;
@@ -50,8 +56,8 @@ export const MovieDetailPage = () => {
           <img
             src={
               movie?.backdrop_path
-                ? `${API_CONFIG.imageBaseUrl}${movie.backdrop_path}`
-                : altbg
+                ? getImageUrl(movie.backdrop_path, "backdrop")
+                : backdropPlaceHolder
             }
             alt="Movie background"
           />
@@ -60,7 +66,7 @@ export const MovieDetailPage = () => {
           <img
             src={
               movie?.poster_path
-              ? `${API_CONFIG.imageBaseUrl}/${movie?.poster_path}`
+              ? getImageUrl(movie.poster_path, "poster")
               : posterPlaceHolder
             }
             alt={movie?.title}
@@ -105,8 +111,8 @@ export const MovieDetailPage = () => {
         <h3>You may also like to watch</h3>
         <MovieGrid
           movies={similarMovies}
-          loading={similarLoading}
-          error={similarError}
+          loading={similarMoviesLoading}
+          error={similarMoviesError}
         />
       </section>
     </>

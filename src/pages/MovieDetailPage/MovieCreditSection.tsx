@@ -1,8 +1,8 @@
-import styles from "./MovieCreditSection.module.css"
-import { useCreditData } from "../../hooks/useCreditData"
-import { API_CONFIG } from "../../config/api";
+import styles from "./MovieCreditSection.module.css";
+import { useCreditData } from "../../hooks/useCreditData";
+import { getImageUrl } from "../../config/api";
 import { Spinner } from "../../components/Spinner/Spinner";
-import placeholderImage from '/photo-placeholder.jpg';
+import profilePlaceHolder from "/photo-placeholder.jpg";
 
 interface MovieCreditSectionProps {
   movieId: number;
@@ -11,25 +11,27 @@ interface MovieCreditSectionProps {
 export const MovieCreditSection = ({ movieId }: MovieCreditSectionProps) => {
   const { castMembers, director, loading, error } = useCreditData(movieId);
 
-  const getProfileImage = (profilePath?: string | null) => {
-    return profilePath 
-      ? `${API_CONFIG.imageBaseUrl}${profilePath}`
-      : placeholderImage;
-  };
-
-  if (loading) return (
-    <div className={styles.loadingContainer}>
-      <Spinner size="medium" />
-      <p>Loading credits...</p>
-    </div>
-  );
+  if (loading)
+    return (
+      <div className={styles.loadingContainer}>
+        <Spinner size="medium" />
+        <p>Loading credits...</p>
+      </div>
+    );
   if (error) return <div>Error loading credits: {error}</div>;
 
   return (
     <div className={styles.movieCreditSection}>
       <div className={styles.directorContainer}>
         <h3>Director</h3>
-        <img src={getProfileImage(director?.profile_path)} alt={director?.name} />
+        <img
+          src={
+            director?.profile_path
+              ? getImageUrl(director.profile_path, "profile")
+              : profilePlaceHolder
+          }
+          alt={director?.name}
+        />
         <div className={styles.directorInfoContainer}>
           <p className={styles.directorName}>{director?.name}</p>
         </div>
@@ -38,10 +40,14 @@ export const MovieCreditSection = ({ movieId }: MovieCreditSectionProps) => {
       <div className={styles.castContainer}>
         <h3>Cast</h3>
         <ul className={styles.castList}>
-          {castMembers.map(member => (
+          {castMembers.map((member) => (
             <li key={member.name} className={styles.castMemberContainer}>
               <img
-                src={getProfileImage(member.profile_path)}
+                src={
+                  member.profile_path
+                    ? getImageUrl(member.profile_path, "profile")
+                    : profilePlaceHolder
+                }
                 alt={member.name}
                 className={styles.castImage}
               />
@@ -53,7 +59,6 @@ export const MovieCreditSection = ({ movieId }: MovieCreditSectionProps) => {
           ))}
         </ul>
       </div>
-
     </div>
-  )
-}
+  );
+};
