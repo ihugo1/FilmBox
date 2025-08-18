@@ -5,7 +5,6 @@
   background-color: var(--color-surface);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: var(--shadow-sm);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
 }
@@ -19,14 +18,21 @@
   width: 100%;
   aspect-ratio: 2/3;
   object-fit: cover;
-  background-color: var(--color-border);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.rating{
+  padding: var(--space-sm);
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+
 }
 
 .title {
-  padding: var(--space-md);
   font-size: var(--font-size-md);
   font-weight: 600;
-  color: var(--color-text);
+  color: var(--color-text); 
+  padding: var(--space-sm) 0;
   line-height: 1.4;
   margin: 0;
 }

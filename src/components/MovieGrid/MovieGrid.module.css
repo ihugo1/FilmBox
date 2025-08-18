@@ -2,10 +2,9 @@
   width: 100%;
   height: auto;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   flex-wrap: wrap;
-  gap: var(--space-xl);
-  padding: var(--space-md);
+  gap: var(--space-lg) 0;
 }
 
 .loadingContainer,

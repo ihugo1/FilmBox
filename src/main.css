@@ -74,4 +74,7 @@ ul, ol {
   --text-color-light: #d3d3d3;
   --text-color-dark: #1d1d1d;
 
+  /* Border Radius */
+  --border-radius: 5px;
+
 }

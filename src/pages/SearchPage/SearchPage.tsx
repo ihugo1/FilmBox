@@ -1,63 +1,120 @@
 import styles from "./SearchPage.module.css";
-import { useSearchMovies } from "../../hooks/useSearchMovies";
-import { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useMovieGenres } from "../../hooks/useMovieGenres";
+import { useMovieExplorer } from "../../hooks/useMovieExplorer";
 import { MovieGrid } from "../../components/MovieGrid/MovieGrid";
+import type { SortOption } from "../../services/movieService";
 
 export const SearchPage = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const initialQuery = searchParams.get("q") || "";
-  const [searchQuery, setSearchQuery] = useState<string>(initialQuery);
-  const { movies, loading, error, hasMore, loadMore } = useSearchMovies(searchQuery);
+  const {
+    genres,
+    loading: loadingGenres,
+    error: errorGenres,
+  } = useMovieGenres();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedGenreId, setSelectedGenreId] = useState<number | null>(null);
+  const [sortBy, setSortBy] = useState<SortOption>("popularity.desc");
+  const { movies, loading, error, hasMorePages, loadMore } = useMovieExplorer(
+    searchQuery,
+    selectedGenreId,
+    sortBy
+  );
 
   useEffect(() => {
-    if (searchQuery) {
-      setSearchParams({ q: searchQuery });
-    } else {
-      setSearchParams({});
-    }
-  }, [searchQuery, setSearchParams]);
+    setSelectedGenreId(null);
+  }, [searchQuery]);
+
+  useEffect(() => {
+    setSearchQuery("");
+  }, [selectedGenreId]);
 
   return (
     <div className={styles.searchPage}>
-      <div className={styles.searchBar}>
-        <input
-          value={searchQuery}
-          type="text"
-          placeholder="Search for movies..."
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-      </div>
+      {/* Sidebar */}
+      <aside
+        className={styles.sidebar}>
+        <h3>Genres</h3>
 
-      {searchQuery.length < 2 && movies.length === 0 && (
-        <div className={styles.emptyState}>
-          <h2>🎬 Search for Movies</h2>
-          <p>Start typing to discover amazing movies...</p>
+        {loadingGenres && <p>Loading genres...</p>}
+        {errorGenres && <p>Error loading genres</p>}
+
+        <div className={styles.genreList}>
+          <button
+            onClick={() => setSelectedGenreId(null)}
+            className={
+              selectedGenreId === null
+                ? styles.selectedGenreBtn
+                : styles.genreBtn
+            }
+          >
+            All Genres
+          </button>
+
+          {genres?.map((genre) => (
+            <button
+              key={genre.id}
+              onClick={() => setSelectedGenreId(genre.id)}
+              className={
+                genre.id === selectedGenreId
+                  ? styles.selectedGenreBtn
+                  : styles.genreBtn
+              }
+            >
+              {genre.name}
+            </button>
+          ))}
         </div>
-      )}
+      </aside>
 
-      {searchQuery.length >= 2 && movies.length === 0 && !loading && (
-        <div className={styles.noResults}>
-          <h2>😔 No movies found</h2>
-          <p>Try searching for "{searchQuery}" with different keywords</p>
+      {/* Main Content */}
+      <main className={styles.mainContent}>
+        <div className={styles.searchBarContainer}>
+          <div className={styles.selectWrapper}>
+            <select
+              className={styles.select}
+              value={selectedGenreId || ""}
+              onChange={(e) => {
+                const value = e.target.value;
+                setSelectedGenreId(value === "" ? null : Number(value));
+              }}
+            >
+              <option value="">All Genres</option>
+              {
+                genres?.map(genre => (
+                  <option key={genre.id} value={genre.id}>{genre.name}</option>
+                ))
+              }
+            </select>
+            <span className={styles.selectArrow}>▼</span>
+          </div>
+
+          <input
+            placeholder="Search for a movie..."
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
         </div>
-      )}
 
-      {loading &&(
-        <div className={styles.loading}>
-          <p>Looking for results..</p>
+        <div className={styles.sortContainer}>
+          {selectedGenreId && (
+            <div className={styles.selectWrapper}>
+              <select
+                className={styles.select}
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value as SortOption)}
+              >
+                <option value="popularity.desc">Most Popular</option>
+                <option value="vote_average.desc">Highest Rated</option>
+                <option value="release_date.desc">Newest First</option>
+              </select>
+              <span className={styles.selectArrow}>▼</span>
+            </div>
+          )}
         </div>
-      )}
-
-      {searchQuery.length >= 1 && (
-        <MovieGrid movies={movies} loading={loading} error={error} />
-      )}
-
-      {hasMore && (
-        <button className={styles.loadMoreButton} onClick={loadMore}>
-          Load more
-        </button>
-      )}
+        <MovieGrid movies={movies} loading={loading} />
+        {hasMorePages && <button onClick={loadMore}>Load more</button>}
+      </main>
     </div>
   );
 };

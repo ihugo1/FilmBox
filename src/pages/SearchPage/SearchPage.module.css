@@ -1,123 +1,130 @@
 .searchPage {
   margin-top: 8vh;
-  min-height: 92vh;
+  display: flex;
   background-color: var(--background-color-light);
+}
+
+.sidebar {
+  width: 25%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: var(--space-3xl);
-  gap: var(--space-lg);
-}
-
-.searchBar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 80%;
-  height: 12vh;
-}
-
-.searchBar input {
-  width: 80%;
-  height: 80%;
   padding: var(--space-md);
-  font-size: var(--font-size-lg);
-  font-family: inherit;
-  color: var(--text-color-light);
-  background-color: var(--background-color-light);
-  border: 2px solid var(--accent-color);
-  border-radius: var(--space-sm);
-  outline: none;
+  gap: var(--space-md);
+  background-color: var(--background-color);
 }
 
-.searchBar input:focus {
-  border-color: var(--accent-color);
-  box-shadow: 0 0 0 2px rgba(1, 126, 53, 0.2);
-}
-
-.searchBar input::placeholder {
-  color: var(--text-color-light);
-  opacity: 0.6;
-}
-
-.emptyState, .noResults, .loading {
-  height: 80vh;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: var(--text-color-light);
+.sidebar h3 {
   text-align: center;
 }
 
-.loadMoreButton {
-  background-color: var(--accent-color);
-  color: var(--text-color-light);
-  padding: var(--space-md) var(--space-xl);
-  border-radius: var(--space-sm);
-  font-size: var(--font-size-md);
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
+.genreList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-sm);
 }
 
-.loadMoreButton:hover {
-  opacity: 0.8;
-  transform: translateY(-1px);
+.selectedGenreBtn,
+.genreBtn {
+  width: 40%;
+  padding: var(--space-sm);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  color: var(--text-color-light);
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.selectedGenreBtn {
+  background-color: var(--accent-color);
+  color: var(--background-color-light);
+}
+
+.mainContent {
+  width: 75%;
+}
+
+.searchBarContainer {
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  padding: var(--space-sm);
+  gap: var(--space-sm);
+}
+
+.searchBarContainer input {
+  width: 80%;
+  padding: var(--space-sm) var(--space-lg);
+  border: none;
+  border-radius: var(--border-radius);
+  background-color: var(--background-color);
+  font-size: var(--font-size-md);
+  color: var(--text-color-light);
+}
+
+.searchBarContainer input:focus {
+  outline: none;
+}
+
+.searchBarContainer .selectWrapper {
+  display: none;
+}
+
+.sortContainer {
+  height: 8vh;
+  display: flex;
+  justify-content: flex-end;
+  padding: var(--space-sm) var(--space-lg);
+}
+
+.selectWrapper {
+  position: relative;
+  display: inline-block;
+  display: flex;
+}
+
+.select {
+  border: none;
+  border-radius: var(--border-radius);
+  background-color: var(--background-color);
+  color: var(--text-color-light);
+  font-size: var(--font-size-sm);
+  padding: var(--space-sm) var(--space-xl) var(--space-sm) var(--space-sm);
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.select:focus {
+  outline: none;
+}
+
+.selectArrow {
+  position: absolute;
+  right: var(--space-sm);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-color-light);
+  pointer-events: none;
+  font-size: var(--font-size-xs);
 }
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-  .searchPage {
-    padding: var(--space-2xl) var(--space-lg);
+  .sidebar {
+    display: none;
+  }
+  .mainContent {
+    width: 100%;
+  }
+  .searchBarContainer .selectWrapper {
+    display: flex;
   }
 }
 
 @media (max-width: 768px) {
-  .searchPage {
-    padding: var(--space-xl) var(--space-md);
-    gap: var(--space-md);
-  }
-  
-  .emptyState, .noResults, .loading {
-    height: 60vh;
-    padding: var(--space-lg);
-  }
-  
-  .emptyState h2, .noResults h2 {
-    font-size: var(--font-size-xl);
-  }
-  
-  .loadMoreButton {
-    padding: var(--space-sm) var(--space-lg);
-    font-size: var(--font-size-sm);
-  }
 }
 
 @media (max-width: 480px) {
-  .searchPage {
-    padding: var(--space-lg) var(--space-sm);
-    gap: var(--space-sm);
-  }
-  
-  .emptyState, .noResults, .loading {
-    height: 50vh;
-    padding: var(--space-md);
-  }
-  
-  .emptyState h2, .noResults h2 {
-    font-size: var(--font-size-lg);
-  }
-  
-  .emptyState p, .noResults p {
-    font-size: var(--font-size-sm);
-  }
-  
-  .loadMoreButton {
-    padding: var(--space-xs) var(--space-md);
-    font-size: var(--font-size-xs);
-    width: 100%;
-    max-width: 200px;
-  }
 }

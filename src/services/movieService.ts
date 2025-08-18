@@ -1,5 +1,11 @@
 import { API_CONFIG, API_HEADERS } from "../config/api";
-import type { Movie, MovieVideo, CrewMember, CastMember } from "../types";
+import type {
+  Movie,
+  MovieVideo,
+  CrewMember,
+  CastMember,
+  Genre,
+} from "../types";
 
 /* RESPONSE TYPES */
 export type MovieListResponse = {
@@ -17,6 +23,14 @@ export type CreditResponse = {
   cast: CastMember[];
   crew: CrewMember[];
 };
+export type GenresResponse = {
+  genres: Genre[];
+};
+
+export type SortOption =
+  | "popularity.desc"
+  | "vote_average.desc"
+  | "release_date.desc";
 
 /* API REQUEST FUNCTION */
 const apiRequest = async (endpoint: string) => {
@@ -33,20 +47,25 @@ const apiRequest = async (endpoint: string) => {
     } else if (error instanceof SyntaxError) {
       throw new Error("Invalid server response (non-JSON)");
     } else {
-      throw error; 
+      throw error;
     }
   }
 };
 
 /* FUNCTIONS */
+export const getMovieGenres = async (): Promise<GenresResponse> => {
+  const genreListData: GenresResponse = await apiRequest("/genre/movie/list");
+  return genreListData;
+};
+
 export const getMovieById = async (id: number): Promise<Movie> => {
   const movie: Movie = await apiRequest(`/movie/${id}?language=en-US`);
   return movie;
 };
 
-export const getPopular = async (): Promise<MovieListResponse> => {
+export const getPopular = async (page = 1): Promise<MovieListResponse> => {
   const movieListData: MovieListResponse = await apiRequest(
-    `/movie/popular?language=en-US`
+    `/movie/popular?language=en-US&page=${page}`
   );
   return movieListData;
 };
@@ -59,6 +78,17 @@ export const searchMovies = async (
     `/search/movie?query=${encodeURIComponent(
       query
     )}&language=en-US&page=${page}`
+  );
+  return movieListData;
+};
+
+export const discoverMovies = async (
+  genreId: number,
+  sortBy: SortOption,
+  page: number
+): Promise<MovieListResponse> => {
+  const movieListData: MovieListResponse = await apiRequest(
+    `/discover/movie?adult=false&language=en-US&page=${page}&sort_by=${sortBy}&with_genres=${genreId}`
   );
   return movieListData;
 };

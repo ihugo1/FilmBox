@@ -21,6 +21,9 @@ export const MovieCard = ({ movie }: MovieCardProps) => {
           }
           alt={movie.title}
         />
+        <div className={styles.rating}>
+          ⭐{movie.vote_average.toFixed(1)}
+        </div>
         <h3 className={styles.title}>{movie.title}</h3>
       </div>
     </Link>
