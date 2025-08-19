@@ -3,22 +3,27 @@ import { useEffect, useState } from "react";
 import { useMovieGenres } from "../../hooks/useMovieGenres";
 import { useMovieExplorer } from "../../hooks/useMovieExplorer";
 import { MovieGrid } from "../../components/MovieGrid/MovieGrid";
+import { Button } from "../../components/Button/Button";
 import type { SortOption } from "../../services/movieService";
 
 export const SearchPage = () => {
   const {
-    genres,
-    loading: loadingGenres,
+    data: genres,
+    isLoading: loadingGenres,
     error: errorGenres,
   } = useMovieGenres();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedGenreId, setSelectedGenreId] = useState<number | null>(null);
   const [sortBy, setSortBy] = useState<SortOption>("popularity.desc");
-  const { movies, loading, error, hasMorePages, loadMore } = useMovieExplorer(
-    searchQuery,
-    selectedGenreId,
-    sortBy
-  );
+  const {
+    data,
+    isLoading,
+    error,
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage,
+  } = useMovieExplorer(searchQuery, selectedGenreId, sortBy);
+  const movies = data?.pages.flatMap((page) => page.results) || [];
 
   useEffect(() => {
     setSelectedGenreId(null);
@@ -31,8 +36,7 @@ export const SearchPage = () => {
   return (
     <div className={styles.searchPage}>
       {/* Sidebar */}
-      <aside
-        className={styles.sidebar}>
+      <aside className={styles.sidebar}>
         <h3>Genres</h3>
 
         {loadingGenres && <p>Loading genres...</p>}
@@ -79,11 +83,11 @@ export const SearchPage = () => {
               }}
             >
               <option value="">All Genres</option>
-              {
-                genres?.map(genre => (
-                  <option key={genre.id} value={genre.id}>{genre.name}</option>
-                ))
-              }
+              {genres?.map((genre) => (
+                <option key={genre.id} value={genre.id}>
+                  {genre.name}
+                </option>
+              ))}
             </select>
             <span className={styles.selectArrow}>▼</span>
           </div>
@@ -112,8 +116,17 @@ export const SearchPage = () => {
             </div>
           )}
         </div>
-        <MovieGrid movies={movies} loading={loading} />
-        {hasMorePages && <button onClick={loadMore}>Load more</button>}
+        <MovieGrid
+          movies={movies}
+          loading={isLoading}
+          error={error?.message || null}
+        />
+        {hasNextPage && (
+          <Button
+            label={`${isFetchingNextPage ? "Loading" : "Load more"}`}
+            onClick={fetchNextPage}
+          />
+        )}
       </main>
     </div>
   );

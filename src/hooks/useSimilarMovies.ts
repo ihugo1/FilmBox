@@ -1,40 +1,12 @@
-import { useEffect, useState } from "react";
 import { getSimilar } from "../services/movieService";
-import type { Movie } from "../types";
+import { useQuery } from "@tanstack/react-query";
 
 export const useSimilarMovies = (movieId: number) => {
-  const [movies, setMovies] = useState<Movie[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    let isMounted = true;
-
-    const fetchMovies = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const data = await getSimilar(movieId);
-        if (isMounted) {
-          setMovies(data.results.slice(0, 5));
-        }
-      } catch (err) {
-        if (isMounted) {
-          setError(err instanceof Error ? err.message : "Error loading movies");
-        }
-      } finally {
-        if (isMounted) {
-          setLoading(false);
-        }
-      }
-    };
-
-    fetchMovies();
-
-    return () => {
-      isMounted = false;
-    };
-  }, [movieId]);
-
-  return { movies, loading, error };
+  return useQuery({
+    queryKey: ["similarMovies", movieId ],
+    queryFn: async () => {
+      const data = await getSimilar(movieId);
+      return data.results.slice(0, 5);
+    }
+  })
 };

@@ -9,16 +9,17 @@ interface MovieCreditSectionProps {
 }
 
 export const MovieCreditSection = ({ movieId }: MovieCreditSectionProps) => {
-  const { castMembers, director, loading, error } = useCreditData(movieId);
+  const { data, isLoading, error } = useCreditData(movieId);
 
-  if (loading)
+  if (isLoading)
     return (
       <div className={styles.loadingContainer}>
         <Spinner size="medium" />
         <p>Loading credits...</p>
       </div>
     );
-  if (error) return <div>Error loading credits: {error}</div>;
+
+  if (error) return <div>Error loading credits: {error.message}</div>;
 
   return (
     <div className={styles.movieCreditSection}>
@@ -26,21 +27,21 @@ export const MovieCreditSection = ({ movieId }: MovieCreditSectionProps) => {
         <h3>Director</h3>
         <img
           src={
-            director?.profile_path
-              ? getImageUrl(director.profile_path, "profile")
+            data?.director?.profile_path
+              ? getImageUrl(data?.director?.profile_path, "profile")
               : profilePlaceHolder
           }
-          alt={director?.name}
+          alt={data?.director?.name}
         />
         <div className={styles.directorInfoContainer}>
-          <p className={styles.directorName}>{director?.name}</p>
+          <p className={styles.directorName}>{data?.director?.name}</p>
         </div>
       </div>
 
       <div className={styles.castContainer}>
         <h3>Cast</h3>
         <ul className={styles.castList}>
-          {castMembers.map((member) => (
+          {data?.castMembers?.map((member) => (
             <li key={member.name} className={styles.castMemberContainer}>
               <img
                 src={

@@ -13,12 +13,12 @@ import posterPlaceHolder from "./../../../public/poster-placeholder.png";
 export const MovieDetailPage = () => {
   const { id } = useParams();
 
-  const movieId = (id ? parseInt(id, 10): 0);
+  const movieId = id ? parseInt(id, 10) : 0;
 
-  const { movie, loading, error } = useGetMovieById(movieId);
-  const { 
-    movies: similarMovies, 
-    loading: similarMoviesLoading, 
+  const { data: movie, isLoading, error } = useGetMovieById(movieId);
+  const {
+    data: similarMovies,
+    isLoading: similarMoviesLoading,
     error: similarMoviesError,
   } = useSimilarMovies(movieId);
 
@@ -26,7 +26,7 @@ export const MovieDetailPage = () => {
     return <div>Movie not found</div>;
   }
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className={styles.loadingContainer}>
         <div className={styles.loadingContent}>
@@ -66,8 +66,8 @@ export const MovieDetailPage = () => {
           <img
             src={
               movie?.poster_path
-              ? getImageUrl(movie.poster_path, "poster")
-              : posterPlaceHolder
+                ? getImageUrl(movie.poster_path, "poster")
+                : posterPlaceHolder
             }
             alt={movie?.title}
           />
@@ -110,9 +110,9 @@ export const MovieDetailPage = () => {
       <section className={styles.similarSection}>
         <h3>You may also like to watch</h3>
         <MovieGrid
-          movies={similarMovies}
+          movies={similarMovies || []}
           loading={similarMoviesLoading}
-          error={similarMoviesError}
+          error={similarMoviesError?.message || null}
         />
       </section>
     </>

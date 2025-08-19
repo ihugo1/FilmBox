@@ -7,9 +7,9 @@ interface MovieVideoSectionProps {
 }
 
 export const MovieVideoSection = ({ movieId }: MovieVideoSectionProps) => {
-  const { trailer, loading, error } = useMovieTrailer(movieId);
+  const { data:trailer, isLoading, error } = useMovieTrailer(movieId);
 
-  if (loading) return (
+  if (isLoading) return (
     <div className={styles.loadingContainer}>
       <Spinner size="medium" />
       <p>Loading trailer...</p>

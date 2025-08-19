@@ -10,45 +10,49 @@ interface MovieGridProps {
   error?: string | null;
 }
 
-export const MovieGrid = React.memo(({ movies, loading, error }: MovieGridProps) => {
-  if (loading && movies.length === 0) {
-    return (
-      <div className={styles.loadingContainer}>
-        <div className={styles.loadingContent}>
-          <Spinner size="medium" />
-          <h3>Loading movies...</h3>
+export const MovieGrid = React.memo(
+  ({ movies, loading, error }: MovieGridProps) => {
+    if (loading && movies.length === 0) {
+      return (
+        <div className={styles.loadingContainer}>
+          <div className={styles.loadingContent}>
+            <Spinner size="medium" />
+            <h3>Loading movies...</h3>
+          </div>
         </div>
-      </div>
+      );
+    }
+
+    if (error) {
+      return (
+        <div className={styles.errorContainer}>
+          <div className={styles.errorContent}>
+            <h3>😔 Something went wrong</h3>
+            <p>We couldn't load the movies. Please try again.</p>
+          </div>
+        </div>
+      );
+    }
+
+    if (movies.length === 0) {
+      return (
+        <div className={styles.emptyContainer}>
+          <div className={styles.emptyContent}>
+            <h3>🎭 No movies found</h3>
+            <p>Try a different search or check back later</p>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <>
+        <div className={styles.movieGrid}>
+          {movies.map((movie) => (
+            <MovieCard movie={movie} key={movie.id} />
+          ))}
+        </div>
+      </>
     );
   }
-
-  if (error) {
-    return (
-      <div className={styles.errorContainer}>
-        <div className={styles.errorContent}>
-          <h3>😔 Something went wrong</h3>
-          <p>We couldn't load the movies. Please try again.</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (movies.length === 0) {
-    return (
-      <div className={styles.emptyContainer}>
-        <div className={styles.emptyContent}>
-          <h3>🎭 No movies found</h3>
-          <p>Try a different search or check back later</p>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className={styles.movieGrid}>
-      {movies.map((movie) => (
-        <MovieCard movie={movie} key={movie.id} />
-      ))}
-    </div>
-  );
-});
+);

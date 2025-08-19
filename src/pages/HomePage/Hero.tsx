@@ -4,7 +4,7 @@ import { getImageUrl } from "../../config/api";
 import backgroundPlaceholder from '/flat-background.png';
 
 interface HeroProps {
-  movie?: Movie;
+  movie: Movie | null;
 }
 
 export const Hero = ({ movie }: HeroProps) => {

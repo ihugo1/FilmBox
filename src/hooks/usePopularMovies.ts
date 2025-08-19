@@ -1,3 +1,16 @@
+import { getPopular } from "../services/movieService";
+import { useQuery } from "@tanstack/react-query";
+
+export const usePopularMovies = () => {
+  return useQuery({
+    queryKey: ["popularMovies"],
+    queryFn: async () => {
+      const data = await getPopular();
+      return data.results.slice(0, 10);
+    }
+  })
+}
+/*
 import { useEffect, useState } from "react";
 import type { Movie } from "../types";
 import { getPopular } from "../services/movieService";
@@ -38,3 +51,4 @@ export const usePopularMovies = () => {
 
   return { movies, loading, error };
 };
+*/
