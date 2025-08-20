@@ -5,7 +5,8 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
@@ -37,7 +38,8 @@ button {
   background: none;
 }
 
-ul, ol {
+ul,
+ol {
   list-style: none;
 }
 
@@ -48,28 +50,43 @@ ul, ol {
 /* Design System Variables */
 :root {
   /* Spacing Scale */
-  --space-xs: 0.25rem;   /* 4px */
-  --space-sm: 0.5rem;    /* 8px */
-  --space-md: 1rem;      /* 16px */
-  --space-lg: 1.5rem;    /* 24px */
-  --space-xl: 2rem;      /* 32px */
-  --space-2xl: 3rem;     /* 48px */
-  --space-3xl: 4rem;     /* 64px */
+  --space-xs: 0.25rem;
+  /* 4px */
+  --space-sm: 0.5rem;
+  /* 8px */
+  --space-md: 1rem;
+  /* 16px */
+  --space-lg: 1.5rem;
+  /* 24px */
+  --space-xl: 2rem;
+  /* 32px */
+  --space-2xl: 3rem;
+  /* 48px */
+  --space-3xl: 4rem;
+  /* 64px */
 
   /* Typography */
-  --font-size-xs: 0.75rem;   /* 12px */
-  --font-size-sm: 0.875rem;  /* 14px */
-  --font-size-md: 1rem;      /* 16px */
-  --font-size-lg: 1.125rem;  /* 18px */
-  --font-size-xl: 1.25rem;   /* 20px */
-  --font-size-2xl: 1.5rem;   /* 24px */
-  --font-size-3xl: 2rem;     /* 32px */
-  --font-size-4xl: 3rem;     /* 48px */
+  --font-size-xs: 0.75rem;
+  /* 12px */
+  --font-size-sm: 0.875rem;
+  /* 14px */
+  --font-size-md: 1rem;
+  /* 16px */
+  --font-size-lg: 1.125rem;
+  /* 18px */
+  --font-size-xl: 1.25rem;
+  /* 20px */
+  --font-size-2xl: 1.5rem;
+  /* 24px */
+  --font-size-3xl: 2rem;
+  /* 32px */
+  --font-size-4xl: 3rem;
+  /* 48px */
 
   /* Color */
   --background-color: #1a2731;
-  --background-color-light: #2b373f; 
-  --background-color-dark: #131d24; 
+  --background-color-light: #2b373f;
+  --background-color-dark: #131d24;
   --accent-color: #017e35;
   --text-color-light: #d3d3d3;
   --text-color-dark: #1d1d1d;
@@ -77,4 +94,102 @@ ul, ol {
   /* Border Radius */
   --border-radius: 5px;
 
+}
+
+.custom-select {
+  width: 100%;
+  height: 100%;
+  font-size: 14px;
+}
+
+/* Contenedor principal */
+.custom-select .react-select__control {
+  background-color: var(--background-color);
+  border: 2px solid var(--background-color);
+  border-radius: 8px;
+  height: 100%;
+  color: var(--text-color-light);
+  transition: all 0.2s ease;
+}
+
+/* Hover y focus */
+.custom-select .react-select__control--is-focused {
+  border-color: none;
+  background-color: var(--background-color);
+}
+
+.custom-select .react-select__control:hover {
+  border: none;
+}
+
+/* Textos */
+.custom-select .react-select__placeholder {
+  color: var(--text-color-light);
+}
+
+.custom-select .react-select__single-value {
+  color: var(--text-color-light);
+  font-weight: 500;
+}
+
+/* Input de búsqueda */
+.custom-select .react-select__input {
+}
+
+/* Menú desplegable */
+.custom-select .react-select__menu {
+  background-color: var(--background-color);
+  border-radius: 8px;
+}
+
+/* Lista de opciones */
+.custom-select .react-select__menu-list {
+}
+
+/* Opciones individuales */
+.custom-select .react-select__option {
+  background-color: transparent;
+  color: var(--text-color-light);
+  border-radius: 6px;
+  padding: 10px 12px;
+  margin: 2px 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Opción hover */
+.custom-select .react-select__option--is-focused {
+  background-color: none;
+}
+
+/* Opción seleccionada */
+.custom-select .react-select__option--is-selected {
+  background-color: var(--accent-color);
+  color: white !important;
+}
+
+/* Indicadores (dropdown arrow) */
+.custom-select .react-select__indicator {
+  color: var(--text-secondary);
+  padding: 8px;
+  cursor: pointer;
+}
+
+.custom-select .react-select__indicator:hover {
+  color: var(--color-primary);
+}
+
+/* Loading indicator */
+.custom-select .react-select__loading-indicator {
+  color: var(--color-primary);
+}
+
+/* Estados disabled */
+.custom-select .react-select__control--is-disabled {
+  background-color: var(--color-secondary);
+  opacity: 0.6;
+}
+
+.custom-select .react-select__control--is-disabled .react-select__single-value {
+  color: var(--text-secondary);
 }

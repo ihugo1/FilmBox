@@ -3,6 +3,7 @@ import { Hero } from "./Hero";
 import { MovieGrid } from "../../components/MovieGrid/MovieGrid";
 import { usePopularMovies } from "../../hooks/usePopularMovies";
 import { useTopRatedMovies } from "../../hooks/useTopRatedMovies";
+import { AsyncStateHandler } from "../../components/AsyncStateHandler/AsyncStateHandler";
 
 export const HomePage = () => {
   const {
@@ -22,21 +23,22 @@ export const HomePage = () => {
       <Hero movie={popularMovies?.[0] || null} />
 
       <section className={styles.popularSection}>
-        <h2>Popular right now</h2>
-        <MovieGrid
-          movies={popularMovies || []}
-          loading={loadingPopularMovies}
-          error={errorPopularMovies?.message || null}
-        />
+        <AsyncStateHandler
+          isLoading={loadingPopularMovies}
+          error={errorPopularMovies || null}
+        >
+          <MovieGrid movies={popularMovies || []} />
+        </AsyncStateHandler>
       </section>
 
       <section className={styles.topRatedSection}>
         <h2>Top rated movies</h2>
-        <MovieGrid
-          movies={topRatedMovies || []}
-          loading={loadingTopRatedMovies}
-          error={errorTopRatedMovies?.message || null}
-        />
+        <AsyncStateHandler
+          isLoading={loadingTopRatedMovies}
+          error={errorTopRatedMovies || null}
+        >
+          <MovieGrid movies={topRatedMovies || []} />
+        </AsyncStateHandler>
       </section>
     </div>
   );

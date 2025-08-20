@@ -1,0 +1,85 @@
+/* Loading State */
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1rem;
+  height: 92vh;
+  gap: 1.5rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.loading span {
+  color: var(--text-secondary, #666);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Error State */
+.error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1rem;
+  height: 92vh;
+  text-align: center;
+  background-color: var(--error-bg, #fef2f2);
+  border: 1px solid var(--error-border, #fecaca);
+  border-radius: 8px;
+  margin: 1rem 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.error h3 {
+  color: var(--error-text, #dc2626);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+}
+
+.error p {
+  color: var(--error-text-secondary, #991b1b);
+  font-size: 0.875rem;
+  margin: 0;
+  max-width: 400px;
+  line-height: 1.5;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .loading,
+  .error {
+    padding: 3rem 1rem;
+    min-height: 250px;
+  }
+
+  .error h3 {
+    font-size: 1.125rem;
+  }
+
+  .error p {
+    font-size: 0.8rem;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .loading span {
+    color: var(--text-secondary-dark, #a1a1aa);
+  }
+
+  .error {
+    background-color: var(--error-bg-dark, #1f1f23);
+    border-color: var(--error-border-dark, #374151);
+  }
+
+  .error h3 {
+    color: var(--error-text-dark, #f87171);
+  }
+
+  .error p {
+    color: var(--error-text-secondary-dark, #fca5a5);
+  }
+}

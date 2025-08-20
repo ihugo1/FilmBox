@@ -27,10 +27,18 @@ export type GenresResponse = {
   genres: Genre[];
 };
 
-export type SortOption =
+/* export type SortOption =
   | "popularity.desc"
   | "vote_average.desc"
-  | "release_date.desc";
+  | "release_date.desc"; */
+
+export const SORT_OPTIONS = [
+  { value: "popularity.desc", label: "Most Popular" },
+  { value: "vote_average.desc", label: "Highest Rated" },
+  { value: "release_date.desc", label: "Newest First" },
+] as const;
+
+export type SortOption = typeof SORT_OPTIONS[number]['value'];
 
 /* API REQUEST FUNCTION */
 const apiRequest = async (endpoint: string) => {
