@@ -1,6 +1,7 @@
 .infoSection {
   height: 92vh;
   position: relative;
+  z-index: 1;
 }
 .background {
   z-index: -1;
@@ -16,18 +17,20 @@
 }
 
 .content {
+  z-index: 1;
   height: 100%;
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
   padding: var(--space-2xl) var(--space-lg);
-  background-color: rgba(31, 31, 31, 0.9);
+  background-color: rgba(41, 41, 41, 0.942);
 }
 
 .content img {
   width: 20%;
   object-fit: contain;
   margin-bottom: var(--space-lg);
+  border-radius: var(--border-radius);
 }
 
 .movieInfo {
@@ -44,10 +47,10 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-sm);
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-sm);
 }
 .genre {
-  padding: var(--space-sm);
+  padding: var(--space-xs);
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 10px;
 }
@@ -57,6 +60,7 @@
 .movieDetails {
   display: flex;
   flex-direction: column;
+  gap: var(--space-sm);
 }
 
 /* Responsive Design */

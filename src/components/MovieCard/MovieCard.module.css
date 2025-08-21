@@ -9,32 +9,63 @@
   cursor: pointer;
 }
 
-.movieCard:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
-}
-
-.poster {
+.posterContainer {
+  position: relative;
   width: 100%;
   aspect-ratio: 2/3;
-  object-fit: cover;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.rating{
+.poster {
+  border-radius: var(--border-radius);
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  transition: all 0.3s ease;
+  border-radius: var(--border-radius);
+}
+
+.playIcon {
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 2px solid white;
+  border-radius: 50px;
+  font-size: 2rem;
+  color: white;
+  transform: translate(-50%, -50%);
+  padding: var(--space-md);
+}
+
+.rating {
   padding: var(--space-sm);
   position: absolute;
   background-color: rgba(0, 0, 0, 0.8);
-
+  border-radius: var(--border-radius) 0 0 0;
 }
 
 .title {
   font-size: var(--font-size-md);
   font-weight: 600;
-  color: var(--color-text); 
+  color: var(--color-text);
   padding: var(--space-sm) 0;
   line-height: 1.4;
   margin: 0;
+}
+
+.movieCard:hover .overlay{
+  opacity: 300%;
+}
+
+.movieCard:hover .title {
+ color: var(--accent-color);
 }
 
 /* Responsive Sizes */
@@ -42,7 +73,7 @@
   .movieCard {
     width: 150px;
   }
-  
+
   .title {
     padding: var(--space-sm);
     font-size: var(--font-size-sm);
@@ -53,7 +84,7 @@
   .movieCard {
     width: 120px;
   }
-  
+
   .title {
     padding: var(--space-xs);
     font-size: var(--font-size-xs);

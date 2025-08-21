@@ -1,40 +1,8 @@
 .homePage {
-  min-height: 100vh;
-}
-
-.popularSection, .topRatedSection {
+  height: auto;
+  margin-top: 8vh;
+  display: flex;
+  flex-direction: column;
   background-color: var(--background-color-light);
-  padding: var(--space-3xl) var(--space-xl);
-  min-height: 50vh;
 }
 
-.popularSection h2, .topRatedSection h2 {
-  color: var(--text-color-light);
-  font-size: var(--font-size-3xl);
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: var(--space-2xl);
-  position: relative;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .popularSection {
-    padding: var(--space-2xl) var(--space-md);
-  }
-  
-  .popularSection h2 {
-    font-size: var(--font-size-2xl);
-    margin-bottom: var(--space-xl);
-  }
-}
-
-@media (max-width: 480px) {
-  .popularSection {
-    padding: var(--space-xl) var(--space-sm);
-  }
-  
-  .popularSection h2 {
-    font-size: var(--font-size-xl);
-  }
-}

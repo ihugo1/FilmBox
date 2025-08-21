@@ -49,6 +49,9 @@ export const InfoSection = ({ movieId }: InfoSectionProps) => {
             <p className={styles.overview}>{movie?.overview}</p>
             <div className={styles.movieDetails}>
               <span>
+                📃 <strong>Original Title:</strong> {movie?.original_title}
+              </span>
+              <span>
                 📅 <strong>Release Date:</strong> {movie?.release_date}
               </span>
               <span>

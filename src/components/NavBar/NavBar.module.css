@@ -15,24 +15,33 @@
   width: 20%;
   display: flex;
   align-items: center;
-  gap: var(--space-md);
-  color: var(--accent-color);
-  font-size: var(--font-size-2xl);
+  font-size: var(--font-size-xl);
   font-weight: 700;
   text-decoration: none;
   transition: all 0.3s ease;
   cursor: pointer;
 }
 
-.logo::before {
-  content: '🎬';
-  font-size: var(--font-size-2xl);
-  margin-right: var(--space-xs);
+.logoFilm{
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px 2px 0 5px;
+  background-color: var(--accent-color);
+  border-radius: 0 0 0 var(--border-radius);
+}
+
+.logoBox{
+  padding: 2px 20px 0 0;
+  background-color: white;
+  border-radius: 0 var(--border-radius) 0 0;
+  color: var(--accent-color);
 }
 
 .logo:hover {
   color: var(--text-color-light);
   transform: scale(1.05);
+  
 }
 
 .navBarLinks {
@@ -41,10 +50,14 @@
   justify-content: center;
   align-items: center;
   gap: var(--space-lg);
+  background-color: transparent;
 }
 
-.navBarLinks li {
+.navBarLink {
   list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .navBarLinks a {

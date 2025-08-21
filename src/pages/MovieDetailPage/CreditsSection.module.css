@@ -1,67 +1,53 @@
-.movieCreditSection{
-  height: auto;
+.movieCreditSection {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-lg);
   padding: var(--space-lg);
-  background-color: var(--background-color-light);
+  gap: var(--space-md);
 }
-.directorContainer{
+
+.directorContainer, .castMemberContainer {
   width: 150px;
-  height: 200px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  height: 250px;
+    margin-bottom: var(--space-xl);
 }
-.directorContainer img{
-  height: 80%;
-  width: auto;
-  object-fit: contain;
-}
-.directorInfoContainer{
-  height: 20%;
+
+.directorContainer {
   text-align: center;
+  margin-bottom: var(--space-xl);
 }
-.directorName{
-  font-size: var(--font-size-md);
-}
-.directorRole{
-  font-size: var(--font-size-sm);
-  opacity: 50%;
-}
-.castContainer{
+
+.movieCreditSection h3 {
+  font-size: var(--font-size-2xl);
   display: flex;
-  flex-direction: column;
   align-items: center;
   gap: var(--space-sm);
 }
-.castList{
+
+.directorContainer h3,
+.castMemberContainer h3 {
+  border-bottom: 2px solid var(--accent-color);
+}
+
+
+.directorContainer img,
+.castMemberContainer img {
+  width: 100%;
+  height: 80%;
+  object-fit: cover;
+  border-radius: var(--border-radius);
+}
+
+
+.castList {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: var(--space-md);
+  border-top: 2px solid var(--accent-color);
+  padding-top: var(--space-md);
 }
-.castMemberContainer{
-  width: 150px;
-  height: 200px;
-  display: flex;
-  flex-direction: column;
-}
-.castMemberContainer img{
-  height: 80%;
-  width: auto;
-  object-fit: contain;
-}
-.castInfoContainer{
-  height: 20%;
-  text-align: center;
-}
-.castName{
-  font-size: var(--font-size-md);
-}
-.castCharacter{
-  font-size: var(--font-size-sm);
-  opacity: 50%;
+
+.castCharacter {
+  opacity: 40%;
 }

@@ -5,9 +5,11 @@ import { MovieCard } from "../MovieCard/MovieCard";
 
 interface MovieGridProps {
   movies: Movie[];
+  gridTitle?: string;
+  icon?: React.ReactNode;
 }
 
-export const MovieGrid = React.memo(({ movies }: MovieGridProps) => {
+export const MovieGrid = React.memo(({ movies, gridTitle, icon }: MovieGridProps) => {
   if (movies.length === 0) {
     return (
       <div className={styles.emptyContainer}>
@@ -20,9 +22,14 @@ export const MovieGrid = React.memo(({ movies }: MovieGridProps) => {
   }
   return (
     <div className={styles.movieGrid}>
-      {movies.map((movie) => (
-        <MovieCard movie={movie} key={movie.id} />
-      ))}
+      {gridTitle && (
+        <h2 className={styles.gridTitle}>{icon}{gridTitle}</h2>
+      )}
+      <div className={styles.grid}>
+        {movies.map((movie) => (
+          <MovieCard key={movie.id} movie={movie} />
+        ))}
+      </div>
     </div>
   );
 });

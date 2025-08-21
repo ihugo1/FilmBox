@@ -1,13 +1,23 @@
 import styles from "./Hero.module.css";
 import type { Movie } from "../../types";
 import { getImageUrl } from "../../config/api";
+import { Button } from "../../components/Button/Button";
 import backgroundPlaceholder from '/flat-background.png';
+import { useNavigate } from "react-router-dom";
 
 interface HeroProps {
   movie: Movie | null;
 }
 
 export const Hero = ({ movie }: HeroProps) => {
+  const navigate = useNavigate();
+
+  const handleGoToMovie = () => {
+    if(movie){
+      navigate(`/movie/${movie.id}`)
+    }
+  }
+
   return (
     <div className={styles.hero}>
 
@@ -43,7 +53,7 @@ export const Hero = ({ movie }: HeroProps) => {
           </div>
         </div>
 
-        <button>Go to movie</button>
+        <Button label="Go to movie" onClick={handleGoToMovie}/>
       </div>
     </div>
   );

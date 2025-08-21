@@ -1,7 +1,15 @@
 .button{
   background-color: var(--accent-color);
-  padding: var(--space-md);
+  padding: var(--space-sm) var(--space-lg);
   border-radius: var(--border-radius);
+  border: 2px solid var(--accent-color);
   color: var(--text-color-dark);
+  font-size: var(--font-size-lg);
   font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.button:hover{
+  background-color: transparent;
+  color: var(--accent-color);
 }

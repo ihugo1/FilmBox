@@ -27,12 +27,11 @@ export const MovieDetailPage = () => {
       <VideosSection movieId={movieId} />
       <CreditsSection movieId={movieId} />
       <section className={styles.similarSection}>
-        <h3>You may also like to watch</h3>
         <AsyncStateHandler
           isLoading={similarMoviesLoading}
           error={similarMoviesError}
         >
-          <MovieGrid movies={similarMovies || []} />
+          <MovieGrid movies={similarMovies || []} gridTitle="Similar Movies" />
         </AsyncStateHandler>
       </section>
     </div>
