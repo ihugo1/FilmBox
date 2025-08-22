@@ -24,6 +24,7 @@ export const Navbar = () => {
         <li><Link className={styles.navBarLink} to="/"><IoHome />Home</Link></li>
         <li><Link className={styles.navBarLink} to="/search"><IoFilmOutline />Movies</Link></li>
         <li><Link className={styles.navBarLink} to="/about"><IoInformationCircle />About</Link></li>
+                <li><Link className={styles.navBarLink} to="/lists"><IoInformationCircle />My lists</Link></li>
       </ul>
       <div className={styles.searchBarContainer}>
         <input

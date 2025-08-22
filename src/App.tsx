@@ -4,7 +4,9 @@ import { Footer } from "./components/Footer/Footer";
 import { HomePage } from "./pages/HomePage/HomePage";
 import { SearchPage } from "./pages/SearchPage/SearchPage";
 import { MovieDetailPage } from "./pages/MovieDetailPage/MovieDetailPage";
+import { MovieListsPage } from "./pages/MovieListsPage/MovieListsPage";
 import { ScrollToTop } from "./components/ScrollToTop/ScrollToTop";
+import { MovieListsProvider } from "./context/MovieListsContext";
 
 const MovieDetailWrapper = () => {
   const { id } = useParams();
@@ -13,15 +15,18 @@ const MovieDetailWrapper = () => {
 
 export function App() {
   return (
-    <BrowserRouter basename="/FilmBox">
-      <ScrollToTop />
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/search" element={<SearchPage />} />
-        <Route path="/movie/:id" element={<MovieDetailWrapper />} />
-      </Routes>
-      <Footer />
-    </BrowserRouter>
+    <MovieListsProvider>
+      <BrowserRouter basename="/FilmBox">
+        <ScrollToTop />
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/search" element={<SearchPage />} />
+          <Route path="/movie/:id" element={<MovieDetailWrapper />} />
+          <Route path="/lists" element={<MovieListsPage />} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
+    </MovieListsProvider>
   );
 }

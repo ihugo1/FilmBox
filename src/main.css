@@ -106,7 +106,7 @@ ol {
 .custom-select .react-select__control {
   background-color: var(--background-color);
   border: 2px solid var(--background-color);
-  border-radius: 8px;
+  border-radius: var(--border-radius);
   height: 100%;
   color: var(--text-color-light);
   transition: all 0.2s ease;

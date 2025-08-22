@@ -9,27 +9,28 @@ interface MovieGridProps {
   icon?: React.ReactNode;
 }
 
-export const MovieGrid = React.memo(({ movies, gridTitle, icon }: MovieGridProps) => {
-  if (movies.length === 0) {
+export const MovieGrid = React.memo(
+  ({ movies, gridTitle, icon }: MovieGridProps) => {
     return (
-      <div className={styles.emptyContainer}>
-        <div className={styles.emptyContent}>
-          <h3>🎭 No movies found</h3>
-          <p>Try a different search or check back later</p>
-        </div>
+      <div className={styles.movieGrid}>
+        {gridTitle && (
+          <h2 className={styles.gridTitle}>
+            <p className={styles.icon}>{icon}</p>
+            <p className={styles.title}>{gridTitle}</p>
+          </h2>
+        )}
+        {movies.length === 0 ? (
+          <div className={styles.emptyContent}>
+            <p>No movies found</p>
+          </div>
+        ) : (
+          <div className={styles.grid}>
+            {movies.map((movie) => (
+              <MovieCard key={movie.id} movie={movie} />
+            ))}
+          </div>
+        )}
       </div>
     );
   }
-  return (
-    <div className={styles.movieGrid}>
-      {gridTitle && (
-        <h2 className={styles.gridTitle}>{icon}{gridTitle}</h2>
-      )}
-      <div className={styles.grid}>
-        {movies.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} />
-        ))}
-      </div>
-    </div>
-  );
-});
+);

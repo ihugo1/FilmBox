@@ -1,23 +1,29 @@
-.movieGrid{
+.movieGrid {
+  width: 100%;
   display: flex;
   height: auto;
   flex-direction: column;
   align-items: center;
-  margin: var(--space-2xl);
   padding: var(--space-xl) var(--space-lg);
   gap: var(--space-2xl);
   border-radius: var(--border-radius);
   background-color: var(--background-color);
 }
 
-.gridTitle{
+.gridTitle {
   display: flex;
   align-items: center;
   gap: var(--space-sm);
   font-size: var(--font-size-3xl);
   font-weight: 700;
   color: var(--text-color);
-  border-bottom: 2px solid var(--accent-color);
+}
+
+.icon{
+  color: var(--accent-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .grid {
@@ -29,12 +35,22 @@
   gap: var(--space-lg) var(--space-sm);
 }
 
+
+.emptyContent {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: var(--space-lg) var(--space-sm);
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .movieGrid{
-    margin: var(--space-lg);
-  }
-  .gridTitle{
+  .gridTitle {
     font-size: var(--font-size-2xl);
+  }
+  .movieGrid{
+    border-radius: 0;
   }
 }

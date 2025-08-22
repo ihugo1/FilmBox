@@ -29,7 +29,7 @@ export const MovieCard = ({ movie }: MovieCardProps) => {
           />
         </div>
         <div className={styles.rating}>
-          ⭐{movie.vote_average.toFixed(1)}
+          ⭐{movie.vote_average?.toFixed(1)}
         </div>
         <h3 className={styles.title}>{movie.title}</h3>
       </div>

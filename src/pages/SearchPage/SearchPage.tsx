@@ -87,7 +87,7 @@ export const SearchPage = () => {
       </div>
 
       <AsyncStateHandler isLoading={isLoading} error={error}>
-        <MovieGrid movies={movies} />
+        <MovieGrid movies={movies} gridTitle={searchQuery.length > 2 ? `Results for "${searchQuery}"` : ""} />
         {hasNextPage && (
           <Button
             label={`${isFetchingNextPage ? "Loading" : "Load more"}`}

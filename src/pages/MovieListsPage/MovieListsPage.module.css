@@ -1,0 +1,8 @@
+.movieListsPage{
+  margin-top: 8vh;
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-lg);
+  gap: var(--space-lg);
+  background-color: var(--background-color-light);
+}

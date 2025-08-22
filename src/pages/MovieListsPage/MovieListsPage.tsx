@@ -1,0 +1,42 @@
+import styles from "./MovieListsPage.module.css";
+import { useGetMoviesByIds } from "../../hooks/useGetMoviesByIds";
+import { MovieGrid } from "../../components/MovieGrid/MovieGrid";
+import { useMovieLists } from "../../context/MovieListsContext";
+import { AsyncStateHandler } from "../../components/AsyncStateHandler/AsyncStateHandler";
+import { IoMdHeart, IoMdBookmark } from "react-icons/io";
+
+export const MovieListsPage = () => {
+  const { watchLaterIds, favoriteIds } = useMovieLists();
+  const {
+    data: watchLaterMovies,
+    isLoading: isLoadingWatchLater,
+    error: errorWatchLater,
+  } = useGetMoviesByIds(watchLaterIds);
+  const {
+    data: favoriteMovies,
+    isLoading: isLoadingFavorites,
+    error: errorFavorites,
+  } = useGetMoviesByIds(favoriteIds);
+
+  return (
+    <div className={styles.movieListsPage}>
+      <AsyncStateHandler
+        isLoading={isLoadingWatchLater}
+        error={errorWatchLater}
+      >
+        <MovieGrid
+          movies={watchLaterMovies || []}
+          gridTitle="My Watch List"
+          icon={<IoMdBookmark />}
+        />
+      </AsyncStateHandler>
+      <AsyncStateHandler isLoading={isLoadingFavorites} error={errorFavorites}>
+        <MovieGrid
+          movies={favoriteMovies || []}
+          gridTitle="My Favorites"
+          icon={<IoMdHeart />}
+        />
+      </AsyncStateHandler>
+    </div>
+  );
+};

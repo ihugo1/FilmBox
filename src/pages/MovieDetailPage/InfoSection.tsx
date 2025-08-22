@@ -2,6 +2,8 @@ import styles from "./InfoSection.module.css";
 import { useGetMovieById } from "../../hooks/useGetMovieById";
 import { getImageUrl } from "../../config/api";
 import { AsyncStateHandler } from "../../components/AsyncStateHandler/AsyncStateHandler";
+import { useMovieLists } from "../../context/MovieListsContext";
+import { IoMdHeart, IoMdBookmark } from "react-icons/io";
 import backdropPlaceHolder from "/flat-background.png";
 import posterPlaceHolder from "./../../../public/poster-placeholder.png";
 
@@ -11,6 +13,28 @@ interface InfoSectionProps {
 
 export const InfoSection = ({ movieId }: InfoSectionProps) => {
   const { data: movie, isLoading, error } = useGetMovieById(movieId);
+  const {
+    addToFavorite,
+    isInFavorite,
+    removeFromFavorite,
+    addToWatchLater,
+    isInWatchLater,
+    removeFromWatchLater,
+  } = useMovieLists();
+
+  const handleFavoriteButton = () => {
+    if (!movie) return;
+    isInFavorite(movie.id)
+      ? removeFromFavorite(movie.id)
+      : addToFavorite(movie.id);
+  };
+
+  const handleWatchLaterButton = () => {
+    if (!movie) return;
+    isInWatchLater(movie.id)
+      ? removeFromWatchLater(movie.id)
+      : addToWatchLater(movie.id);
+  };
 
   return (
     <AsyncStateHandler isLoading={isLoading} error={error}>
@@ -26,14 +50,42 @@ export const InfoSection = ({ movieId }: InfoSectionProps) => {
           />
         </div>
         <div className={styles.content}>
-          <img
-            src={
-              movie?.poster_path
-                ? getImageUrl(movie.poster_path, "poster")
-                : posterPlaceHolder
-            }
-            alt={movie?.title}
-          />
+
+          <div className={styles.posterContainer}>
+            <img
+              src={
+                movie?.poster_path
+                  ? getImageUrl(movie.poster_path, "poster")
+                  : posterPlaceHolder
+              }
+              alt={movie?.title}
+            />
+            <div className={styles.movieButtons}>
+              {movie && (
+                <>
+                  <button
+                    className={`${styles.favoriteButton} ${
+                      movie && isInFavorite(movie.id) ? styles.added : ""
+                    }`}
+                    onClick={handleFavoriteButton}
+                    aria-placeholder="Add to favorites"
+                  >
+                    <IoMdHeart />
+                  </button>
+
+                  <button
+                    className={`${styles.watchLaterButton} ${
+                      movie && isInWatchLater(movie.id) ? styles.added : ""
+                    }`}
+                    onClick={handleWatchLaterButton}
+                  >
+                    <IoMdBookmark />
+                  </button>
+                </>
+              )}
+            </div>
+          </div>
+
           <div className={styles.movieInfo}>
             <h3 className={styles.title}>
               {movie?.title} (
