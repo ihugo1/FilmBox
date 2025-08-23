@@ -16,7 +16,7 @@ const MovieDetailWrapper = () => {
 export function App() {
   return (
     <MovieListsProvider>
-      <HashRouter basename="/FilmBox">
+      <HashRouter>
         <ScrollToTop />
         <Navbar />
         <Routes>
