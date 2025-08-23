@@ -24,7 +24,7 @@
   justify-content: space-around;
   align-items: flex-start;
   padding: var(--space-2xl) var(--space-lg);
-  background-color: rgba(41, 41, 41, 0.942);
+  background-color: rgba(41, 41, 41, 0.891);
 }
 
 .content img {
@@ -127,7 +127,7 @@
   }
 
   .posterContainer {
-    width: 50%;
+    width: 100%;
   }
 
   .movieInfo {

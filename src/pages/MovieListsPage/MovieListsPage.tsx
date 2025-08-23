@@ -26,14 +26,14 @@ export const MovieListsPage = () => {
       >
         <MovieGrid
           movies={watchLaterMovies || []}
-          gridTitle="My Watch List"
+          gridTitle="Watch Later"
           icon={<IoMdBookmark />}
         />
       </AsyncStateHandler>
       <AsyncStateHandler isLoading={isLoadingFavorites} error={errorFavorites}>
         <MovieGrid
           movies={favoriteMovies || []}
-          gridTitle="My Favorites"
+          gridTitle="Favorites"
           icon={<IoMdHeart />}
         />
       </AsyncStateHandler>

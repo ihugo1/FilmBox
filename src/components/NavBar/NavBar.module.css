@@ -12,7 +12,7 @@
 }
 
 .logo {
-  width: 20%;
+  width: 15%;
   display: flex;
   align-items: center;
   font-size: var(--font-size-xl);
@@ -45,7 +45,7 @@
 }
 
 .navBarLinks {
-  width: 40%;
+  width: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -71,35 +71,36 @@
   color: var(--accent-color);
 }
 
-.searchBarContainer {
+.searchBarContainer{
+  width: 20%;
+  height: 60%;
+  display: flex;
+  align-items: center;
+  border-radius: var(--border-radius);
+
+  background-color: var(--background-color-light);
+}
+.searchBarIcon{
   width: 20%;
 }
-
-.searchBarContainer input {
+.searchBarContainer input{
   width: 100%;
-  height: 2rem;
-  padding: 0 1rem;
-  border-radius: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid var(--border-color);
-  font-size: var(--font-size-md);
-  transition: border-color 0.3s ease;
+  height: 100%;
+  border: none;
+  color: var(--text-color-light);
+  background-color: transparent;
 }
-
 .searchBarContainer input:focus{
-  border-color: var(--accent-color);
   outline: none;
 }
 
+
 /* Responsive Design */
 @media (max-width: 1024px) {
-  /* Tablet styles */
+
 }
 
 @media (max-width: 768px) {
-  /* Mobile styles */
   .navBar {
     justify-content: space-between;
   }
@@ -114,6 +115,14 @@
     width: 100%;
     background-color: var(--background-color);
     position: fixed;
+    display: flex;
+    justify-content: space-evenly;
+    box-shadow: 0 4px 12px rgba(33, 33, 33, 0.5);
+  }
+  .navBarLink{
+    display: flex;
+    flex-direction: column;
+    gap: 0;
   }
 }
 

@@ -19,7 +19,7 @@
   color: var(--text-color);
 }
 
-.icon{
+.icon {
   color: var(--accent-color);
   display: flex;
   align-items: center;
@@ -46,11 +46,13 @@
 }
 
 /* Responsive adjustments */
+@media (max-width: 1024px) {}
+
 @media (max-width: 768px) {
-  .gridTitle {
-    font-size: var(--font-size-2xl);
-  }
-  .movieGrid{
+  .movieGrid {
     border-radius: 0;
+    padding: var(--space-xl) var(--space-sm);
   }
 }
+
+@media (max-width: 480px) {}

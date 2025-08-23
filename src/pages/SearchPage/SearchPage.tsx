@@ -1,5 +1,6 @@
 import styles from "./SearchPage.module.css";
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { useMovieGenres } from "../../hooks/useMovieGenres";
 import { useMovieExplorer } from "../../hooks/useMovieExplorer";
 import { MovieGrid } from "../../components/MovieGrid/MovieGrid";
@@ -7,6 +8,7 @@ import { Button } from "../../components/Button/Button";
 import { AsyncStateHandler } from "../../components/AsyncStateHandler/AsyncStateHandler";
 import Select from "react-select";
 import type { SortOption } from "../../services/movieService";
+import { useDebounce } from "../../hooks/useDebonce"; // <-- 1. Importado
 
 interface genreSelectOption {
   value: number;
@@ -14,13 +16,23 @@ interface genreSelectOption {
 }
 
 export const SearchPage = () => {
+  const [searchParams] = useSearchParams();
+  const query = searchParams.get("q");
+
   const { data: genres, isLoading: loadingGenres, error: errorGenres, } = useMovieGenres();
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState(query || "");
   const [selectedGenre, setSelectedGenre] = useState<genreSelectOption | null>(null);
   const [sortBy, setSortBy] = useState<SortOption>("popularity.desc");
-  const { data, isLoading, error, hasNextPage, fetchNextPage, isFetchingNextPage } =
-    useMovieExplorer(searchQuery, selectedGenre?.value ?? null, sortBy);
+  
+  const debouncedSearchQuery = useDebounce(searchQuery, 500); 
 
+  const { data, isLoading, error, hasNextPage, fetchNextPage, isFetchingNextPage } =
+    useMovieExplorer(debouncedSearchQuery, selectedGenre?.value ?? null, sortBy);
+    
+
+  useEffect(() => {
+    setSearchQuery(query || "");
+  }, [query]);
 
   const movies = data?.pages.flatMap((page) => page.results) || [];
 
@@ -36,10 +48,10 @@ export const SearchPage = () => {
   ]
 
   useEffect(() => {
-    if (searchQuery.trim() !== "") {
+    if (debouncedSearchQuery.trim() !== "") {
       setSelectedGenre(null);
     }
-  }, [searchQuery]);
+  }, [debouncedSearchQuery]);
 
   useEffect(() => {
     if (selectedGenre !== null) {
@@ -87,7 +99,7 @@ export const SearchPage = () => {
       </div>
 
       <AsyncStateHandler isLoading={isLoading} error={error}>
-        <MovieGrid movies={movies} gridTitle={searchQuery.length > 2 ? `Results for "${searchQuery}"` : ""} />
+        <MovieGrid movies={movies} gridTitle={debouncedSearchQuery.length > 2 ? `Results for "${debouncedSearchQuery}"` : ""} />
         {hasNextPage && (
           <Button
             label={`${isFetchingNextPage ? "Loading" : "Load more"}`}
