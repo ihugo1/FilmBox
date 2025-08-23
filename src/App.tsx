@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useParams, HashRouter } from "react-router-dom";
 import { Navbar } from "./components/NavBar/Navbar";
 import { Footer } from "./components/Footer/Footer";
 import { HomePage } from "./pages/HomePage/HomePage";
@@ -16,7 +16,7 @@ const MovieDetailWrapper = () => {
 export function App() {
   return (
     <MovieListsProvider>
-      <BrowserRouter basename="/FilmBox">
+      <HashRouter basename="/FilmBox">
         <ScrollToTop />
         <Navbar />
         <Routes>
@@ -26,7 +26,7 @@ export function App() {
           <Route path="/lists" element={<MovieListsPage />} />
         </Routes>
         <Footer />
-      </BrowserRouter>
+      </HashRouter>
     </MovieListsProvider>
   );
 }
