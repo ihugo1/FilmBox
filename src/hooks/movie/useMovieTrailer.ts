@@ -1,5 +1,5 @@
-import { getMovieVideos } from "../services/movieService";
 import { useQuery } from "@tanstack/react-query";
+import { getMovieVideos } from "../../services/movie.service";
 
 export const useMovieTrailer = (movieId: number) => {
   return useQuery({

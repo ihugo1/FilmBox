@@ -1,11 +1,10 @@
 import styles from "./MovieDetailPage.module.css";
 import { useParams } from "react-router-dom";
-import { InfoSection } from "./InfoSection";
-import { VideosSection } from "./VideosSection";
-import { CreditsSection } from "./CreditsSection";
-import { MovieGrid } from "../../components/MovieGrid/MovieGrid";
-import { useSimilarMovies } from "../../hooks/useSimilarMovies";
-import { AsyncStateHandler } from "../../components/AsyncStateHandler/AsyncStateHandler";
+import { InfoSection } from "./components/InfoSection";
+import { VideosSection } from "./components/VideosSection";
+import { CreditsSection } from "./components/CreditsSection";
+import { MovieGrid, AsyncStateHandler } from "../../components";
+import { useSimilarMovies } from "../../hooks";
 
 export const MovieDetailPage = () => {
   const { id } = useParams();

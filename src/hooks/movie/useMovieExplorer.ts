@@ -1,10 +1,10 @@
+import { useInfiniteQuery } from "@tanstack/react-query";
 import {
   searchMovies,
   discoverMovies,
   getPopular,
-  type SortOption,
-} from "../services/movieService";
-import { useInfiniteQuery } from "@tanstack/react-query";
+} from "../../services/movie.service";
+import type { SortOption } from "../../types";
 
 export const useMovieExplorer = (
   query: string,

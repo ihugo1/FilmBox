@@ -1,8 +1,8 @@
 import styles from "./Hero.module.css";
-import type { Movie } from "../../types";
-import { getImageUrl } from "../../config/api";
-import { Button } from "../../components/Button/Button";
-import backgroundPlaceholder from '/flat-background.png';
+import type { Movie } from "../../../types";
+import { getImageUrl } from "../../../config/tmdb.config";
+import { Button } from "../../../components";
+import backgroundPlaceholder from "/flat-background.png";
 import { useNavigate } from "react-router-dom";
 
 interface HeroProps {
@@ -13,22 +13,22 @@ export const Hero = ({ movie }: HeroProps) => {
   const navigate = useNavigate();
 
   const handleGoToMovie = () => {
-    if(movie){
-      navigate(`/movie/${movie.id}`)
+    if (movie) {
+      navigate(`/movie/${movie.id}`);
     }
-  }
+    return;
+  };
 
   return (
     <div className={styles.hero}>
-
-      <img 
-        className={styles.background} 
+      <img
+        className={styles.background}
         src={
-          movie?.backdrop_path 
-            ? getImageUrl(movie.backdrop_path, "backdrop") 
+          movie?.backdrop_path
+            ? getImageUrl(movie.backdrop_path, "backdrop")
             : backgroundPlaceholder
         }
-        alt="Hero background" 
+        alt="Hero background"
       />
 
       <div className={styles.content}>
@@ -37,7 +37,8 @@ export const Hero = ({ movie }: HeroProps) => {
             {movie?.title || "Welcome to FilmBox"}
           </h1>
           <p className={styles.overview}>
-            {movie?.overview || "Discover and explore movies from around the world"}
+            {movie?.overview ||
+              "Discover and explore movies from around the world"}
           </p>
           <div className={styles.movieDetails}>
             {movie?.release_date && (
@@ -53,7 +54,7 @@ export const Hero = ({ movie }: HeroProps) => {
           </div>
         </div>
 
-        <Button label="Go to movie" onClick={handleGoToMovie}/>
+        <Button label="Go to movie" onClick={handleGoToMovie} />
       </div>
     </div>
   );

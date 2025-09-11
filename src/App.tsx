@@ -1,11 +1,6 @@
 import { Routes, Route, useParams, HashRouter } from "react-router-dom";
-import { Navbar } from "./components/NavBar/Navbar";
-import { Footer } from "./components/Footer/Footer";
-import { HomePage } from "./pages/HomePage/HomePage";
-import { SearchPage } from "./pages/SearchPage/SearchPage";
-import { MovieDetailPage } from "./pages/MovieDetailPage/MovieDetailPage";
-import { MovieListsPage } from "./pages/MovieListsPage/MovieListsPage";
-import { ScrollToTop } from "./components/ScrollToTop/ScrollToTop";
+import { Navbar, Footer, ScrollToTop } from "./components";
+import { HomePage, SearchPage, MovieDetailPage, MovieListsPage } from "./pages";
 import { MovieListsProvider } from "./context/MovieListsContext";
 
 const MovieDetailWrapper = () => {

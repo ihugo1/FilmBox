@@ -1,9 +1,7 @@
 import styles from "./HomePage.module.css";
-import { Hero } from "./Hero";
-import { MovieGrid } from "../../components/MovieGrid/MovieGrid";
-import { usePopularMovies } from "../../hooks/usePopularMovies";
-import { useTopRatedMovies } from "../../hooks/useTopRatedMovies";
-import { AsyncStateHandler } from "../../components/AsyncStateHandler/AsyncStateHandler";
+import { Hero } from "./components/Hero";
+import { MovieGrid, AsyncStateHandler } from "../../components";
+import { usePopularMovies, useTopRatedMovies } from "../../hooks";
 import { ImFire } from "react-icons/im";
 import { FaTrophy } from "react-icons/fa";
 

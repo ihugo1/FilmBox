@@ -1,7 +1,7 @@
 import styles from "./MovieCard.module.css";
 import { Link } from "react-router-dom";
 import type { Movie } from "../../types";
-import { getImageUrl } from "../../config/api";
+import { getImageUrl } from "../../config/tmdb.config";
 import placeHolderImage from "../../../public/poster-placeholder.png";
 import { IoPlay } from "react-icons/io5";
 

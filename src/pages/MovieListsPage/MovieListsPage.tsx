@@ -1,8 +1,7 @@
 import styles from "./MovieListsPage.module.css";
-import { useGetMoviesByIds } from "../../hooks/useGetMoviesByIds";
-import { MovieGrid } from "../../components/MovieGrid/MovieGrid";
+import { useGetMoviesByIds } from "../../hooks";
+import { MovieGrid, AsyncStateHandler } from "../../components";
 import { useMovieLists } from "../../context/MovieListsContext";
-import { AsyncStateHandler } from "../../components/AsyncStateHandler/AsyncStateHandler";
 import { IoMdHeart, IoMdBookmark } from "react-icons/io";
 
 export const MovieListsPage = () => {

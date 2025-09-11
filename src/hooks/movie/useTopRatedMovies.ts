@@ -1,5 +1,5 @@
-import { getTopRated } from "../services/movieService";
 import { useQuery } from "@tanstack/react-query";
+import { getTopRated } from "../../services/movie.service";
 
 export const useTopRatedMovies = () => {
   return useQuery({

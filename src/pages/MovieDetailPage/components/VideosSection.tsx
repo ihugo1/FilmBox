@@ -1,6 +1,6 @@
 import styles from "./VideosSection.module.css";
-import { useMovieTrailer } from "../../hooks/useMovieTrailer";
-import { AsyncStateHandler } from "../../components/AsyncStateHandler/AsyncStateHandler";
+import { useMovieTrailer } from "../../../hooks";
+import { AsyncStateHandler } from "../../../components";
 
 interface VideoSectionProps {
   movieId: number;

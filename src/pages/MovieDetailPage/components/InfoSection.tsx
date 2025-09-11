@@ -1,11 +1,11 @@
 import styles from "./InfoSection.module.css";
-import { useGetMovieById } from "../../hooks/useGetMovieById";
-import { getImageUrl } from "../../config/api";
-import { AsyncStateHandler } from "../../components/AsyncStateHandler/AsyncStateHandler";
-import { useMovieLists } from "../../context/MovieListsContext";
+import { useGetMovieById } from "../../../hooks/movie/useGetMovieById";
+import { getImageUrl } from "../../../config/tmdb.config";
+import { AsyncStateHandler } from "../../../components";
+import { useMovieLists } from "../../../context/MovieListsContext";
 import { IoMdHeart, IoMdBookmark } from "react-icons/io";
 import backdropPlaceHolder from "/flat-background.png";
-import posterPlaceHolder from "./../../../public/poster-placeholder.png";
+import posterPlaceHolder from "/poster-placeholder.png";
 
 interface InfoSectionProps {
   movieId: number;

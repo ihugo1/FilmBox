@@ -1,12 +1,10 @@
 import styles from "./CreditsSection.module.css";
-import { useCreditData } from "../../hooks/useCreditData";
-import { getImageUrl } from "../../config/api";
-import { AsyncStateHandler } from "../../components/AsyncStateHandler/AsyncStateHandler";
+import { useCreditData } from "../../../hooks";
+import { getImageUrl } from "../../../config/tmdb.config";
+import { AsyncStateHandler } from "../../../components";
 import profilePlaceHolder from "/photo-placeholder.jpg";
 import { GiFilmProjector } from "react-icons/gi";
 import { FaUserLarge } from "react-icons/fa6";
-
-
 
 interface CreditsSectionProps {
   movieId: number;
@@ -18,7 +16,10 @@ export const CreditsSection = ({ movieId }: CreditsSectionProps) => {
   return (
     <AsyncStateHandler isLoading={isLoading} error={error}>
       <div className={styles.movieCreditSection}>
-        <h3><GiFilmProjector className={styles.icon} />Director</h3>
+        <h3>
+          <GiFilmProjector className={styles.icon} />
+          Director
+        </h3>
         <div className={styles.directorContainer}>
           <img
             src={
@@ -30,7 +31,10 @@ export const CreditsSection = ({ movieId }: CreditsSectionProps) => {
           />
           <p className={styles.directorName}>{data?.director?.name}</p>
         </div>
-        <h3><FaUserLarge className={styles.icon} />Cast</h3>
+        <h3>
+          <FaUserLarge className={styles.icon} />
+          Cast
+        </h3>
         <ul className={styles.castList}>
           {data?.castMembers?.map((member) => (
             <li key={member.name} className={styles.castMemberContainer}>
@@ -48,7 +52,6 @@ export const CreditsSection = ({ movieId }: CreditsSectionProps) => {
             </li>
           ))}
         </ul>
-
       </div>
     </AsyncStateHandler>
   );

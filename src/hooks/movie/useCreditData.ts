@@ -1,5 +1,5 @@
-import { getMovieCredits } from "../services/movieService";
 import { useQuery } from "@tanstack/react-query";
+import { getMovieCredits } from "../../services/movie.service";
 
 export const useCreditData = (movieId: number) => {
   return useQuery({
