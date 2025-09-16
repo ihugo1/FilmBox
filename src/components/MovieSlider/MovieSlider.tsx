@@ -2,6 +2,7 @@ import styles from "./MovieSlider.module.css";
 import { MovieCard } from "../MovieCard/MovieCard";
 import type { Movie } from "../../types";
 import React, { useRef, useEffect } from "react";
+import { AsyncStateHandler } from "../AsyncStateHandler/AsyncStateHandler";
 
 interface Props {
   sliderTitle?: string;
@@ -27,7 +28,6 @@ export const MovieSlider = React.memo(({ sliderTitle, movies, isLoading, error }
       });
     };
 
-    // Delay para asegurar que el contenido esté renderizado
     const timeoutId = setTimeout(() => {
       slider.addEventListener('wheel', handleWheel, { passive: false });
     }, 100);
@@ -42,17 +42,22 @@ export const MovieSlider = React.memo(({ sliderTitle, movies, isLoading, error }
   return (
     <div className={styles.movieSlider}>
       {sliderTitle && <h2 className={styles.sliderTitle}>{sliderTitle}</h2>}
-      {movies.length === 0 ? (
-        <div className={styles.emptyContent}>
-          <p>No movies found</p>
-        </div>
-      ) : (
-        <div ref={sliderRef} className={styles.slider}>
-          {movies.map((movie) => (
-            <MovieCard key={movie.id} movie={movie} />
-          ))}
-        </div>
-      )}
+      <AsyncStateHandler
+        isLoading={isLoading}
+        error={error ? new Error(error) : null}
+      >
+        {movies.length === 0 ? (
+          <div className={styles.emptyContent}>
+            <p>No movies found</p>
+          </div>
+        ) : (
+          <div ref={sliderRef} className={styles.slider}>
+            {movies.map((movie) => (
+              <MovieCard key={movie.id} movie={movie} />
+            ))}
+          </div>
+        )}
+      </AsyncStateHandler>
     </div>
   );
 });
