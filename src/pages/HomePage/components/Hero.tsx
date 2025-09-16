@@ -54,7 +54,7 @@ export const Hero = ({ movie }: HeroProps) => {
           </div>
         </div>
 
-        <Button label="Go to movie" onClick={handleGoToMovie} />
+        {movie && <Button label="Go to movie" onClick={handleGoToMovie} />}
       </div>
     </div>
   );

@@ -2,52 +2,72 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: var(--space-lg);
-  gap: var(--space-md);
-}
-
-.directorContainer, .castMemberContainer {
-  width: 150px;
-  height: 250px;
-    margin-bottom: var(--space-xl);
+  justify-content: center;
+  gap: var(--space-3xl);
 }
 
 .directorContainer {
-  text-align: center;
-  margin-bottom: var(--space-xl);
-}
-
-.movieCreditSection h3 {
-  font-size: var(--font-size-2xl);
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: var(--space-sm);
+  width: 150px;
 }
 
-.directorContainer h3,
-.castMemberContainer h3 {
-  border-bottom: 2px solid var(--accent-color);
+.directorContainer h3 {
+  text-align: left;
+  font-size: var(--font-size-2xl);
+  margin-bottom: var(--space-md);
 }
 
-
-.directorContainer img,
-.castMemberContainer img {
-  width: 100%;
-  height: 80%;
+.directorContainer img {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
   object-fit: cover;
-  border-radius: var(--border-radius);
+  margin-bottom: var(--space-sm);
 }
 
+.castContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.castContainer h3 {
+  text-align: left;
+  margin-right: auto;
+  font-size: var(--font-size-2xl);
+  margin-bottom: var(--space-md);
+}
 
 .castList {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--space-md);
-  border-top: 2px solid var(--accent-color);
-  padding-top: var(--space-md);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-gap: var(--space-lg);
 }
 
-.castCharacter {
+.castMemberContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 150px;
+  margin-right: auto;
+}
+
+.castContainer img {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: var(--space-sm);
+}
+
+.castMemberName, .castMemberCharacter, .directorName{
+  font-size: var(--font-size-md);
+  text-align: center;
+}
+
+.castMemberCharacter{
   opacity: 40%;
+  font-size: var(--font-size-sm);
 }

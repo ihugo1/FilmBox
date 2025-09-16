@@ -4,9 +4,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: var(--space-lg);
-  gap: var(--space-lg);
-  background-color: var(--background-color-light);
+  padding: var(--space-md) var(--space-3xl);
+  gap: var(--space-md);
+  background-color: var(--background-color);
 }
 
 .searchContainer {
@@ -15,7 +15,8 @@
   display: flex;
   justify-content: center;
   gap: var(--space-sm);
-
+  border: 2px solid var(--background-color-light);
+  border-radius: var(--border-radius);
 }
 
 .searchContainer input {
@@ -43,6 +44,8 @@
 .select {
   height: 100%;
   width: 20%;
+  border: 2px solid var(--background-color-light);
+  border-radius: var(--border-radius);
 }
 
 
@@ -58,12 +61,10 @@
 }
 
 @media (max-width: 768px) {
-  .searchPage {
-    padding-left: 0;
-    padding-right: 0;
-  }
 
-  .selectContainer, .searchContainer{
+
+  .selectContainer,
+  .searchContainer {
     padding: 0 var(--space-sm);
   }
 

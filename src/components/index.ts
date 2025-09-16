@@ -6,3 +6,4 @@ export * from './MovieGrid/MovieGrid';
 export * from './NavBar/Navbar';
 export * from './ScrollToTop/ScrollToTop';
 export * from './Spinner/Spinner';
+export * from "./MovieSlider/MovieSlider";

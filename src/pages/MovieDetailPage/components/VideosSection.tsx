@@ -13,7 +13,6 @@ export const VideosSection = ({ movieId }: VideoSectionProps) => {
     <AsyncStateHandler isLoading={isLoading} error={error}>
       {trailer ? (
         <div className={styles.movieVideoSection}>
-          <div className={styles.trailerContainer}>
             <h2>Official Trailer</h2>
             <iframe
               src={`https://youtube.com/embed/${trailer.key}`}
@@ -21,7 +20,6 @@ export const VideosSection = ({ movieId }: VideoSectionProps) => {
               allowFullScreen
               className={styles.trailer}
             />
-          </div>
         </div>
       ) : (
         <div className={styles.noTrailerContainer}>

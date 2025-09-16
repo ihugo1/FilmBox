@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { InfoSection } from "./components/InfoSection";
 import { VideosSection } from "./components/VideosSection";
 import { CreditsSection } from "./components/CreditsSection";
-import { MovieGrid, AsyncStateHandler } from "../../components";
+import { MovieSlider } from "../../components";
 import { useSimilarMovies } from "../../hooks";
 
 export const MovieDetailPage = () => {
@@ -23,16 +23,14 @@ export const MovieDetailPage = () => {
   return (
     <div className={styles.movieDetailPage}>
       <InfoSection movieId={movieId} />
-      <VideosSection movieId={movieId} />
       <CreditsSection movieId={movieId} />
-      <section className={styles.similarSection}>
-        <AsyncStateHandler
-          isLoading={similarMoviesLoading}
-          error={similarMoviesError}
-        >
-          <MovieGrid movies={similarMovies || []} gridTitle="Similar Movies" />
-        </AsyncStateHandler>
-      </section>
+      <VideosSection movieId={movieId} />
+      <MovieSlider
+        sliderTitle="You may also like"
+        movies={similarMovies || []}
+        isLoading={similarMoviesLoading}
+        error={similarMoviesError?.message}
+      />
     </div>
   );
 };

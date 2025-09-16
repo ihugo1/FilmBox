@@ -1,9 +1,7 @@
 import styles from "./HomePage.module.css";
-import { Hero } from "./components/Hero";
-import { MovieGrid, AsyncStateHandler } from "../../components";
+import { HeroCarousel } from "./components/HeroCarousel";
+import { MovieSlider } from "../../components";
 import { usePopularMovies, useTopRatedMovies } from "../../hooks";
-import { ImFire } from "react-icons/im";
-import { FaTrophy } from "react-icons/fa";
 
 export const HomePage = () => {
   const {
@@ -18,25 +16,23 @@ export const HomePage = () => {
     error: errorTopRatedMovies,
   } = useTopRatedMovies();
 
+  const heroMovies = popularMovies ? popularMovies.slice(0, 5) : [];
+
   return (
     <div className={styles.homePage}>
-      <Hero movie={popularMovies?.[0] || null} />
-      <section className={styles.popularSection}>
-        <AsyncStateHandler
-          isLoading={loadingPopularMovies}
-          error={errorPopularMovies || null}
-        >
-          <MovieGrid movies={popularMovies || []} gridTitle="Trending" icon={<ImFire />} />
-        </AsyncStateHandler>
-      </section>
-      <section className={styles.topRatedSection}>
-        <AsyncStateHandler
-          isLoading={loadingTopRatedMovies}
-          error={errorTopRatedMovies || null}
-        >
-          <MovieGrid movies={topRatedMovies || []} gridTitle="Top Rated" icon={<FaTrophy />} />
-        </AsyncStateHandler>
-      </section>
+      <HeroCarousel movies={heroMovies} />
+      <MovieSlider
+        sliderTitle="Trending"
+        movies={popularMovies || []}
+        isLoading={loadingPopularMovies}
+        error={errorPopularMovies?.message}
+      />
+      <MovieSlider
+        movies={topRatedMovies || []}
+        sliderTitle="Top Rated"
+        isLoading={loadingTopRatedMovies}
+        error={errorTopRatedMovies?.message}
+      />
     </div>
   );
 };

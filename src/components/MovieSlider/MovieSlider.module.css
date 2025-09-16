@@ -1,0 +1,29 @@
+.movieSlider {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-md) 0;
+  gap: var(--space-sm);
+  background-color: var(--background-color);
+}
+
+.sliderTitle{
+  margin-left: var(--space-md);
+}
+
+.slider {
+  display: flex;
+  gap: var(--space-sm);
+  overflow-x: auto;
+  overflow-y: scroll;
+  padding: 0 var(--space-md);
+  
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; 
+  -ms-overflow-style: none;
+  
+  will-change: scroll-position;
+}
+
+.slider::-webkit-scrollbar {
+  display: none; 
+}

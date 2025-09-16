@@ -6,7 +6,7 @@ export const useCreditData = (movieId: number) => {
     queryKey: ["movieCredits", movieId],
     queryFn: async () => {
       const data = await getMovieCredits(movieId);
-      const castMembers = data.cast.slice(0, 6);
+      const castMembers = data.cast.slice(0, 10);
       const director = data.crew.find((member) => member.job === "Director");
       return {
         castMembers,

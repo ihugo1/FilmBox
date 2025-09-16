@@ -1,27 +1,16 @@
 .homePage {
+  margin-top: 7vh;
   width: 100%;
   height: auto;
-  margin-top: 8vh;
   display: flex;
   flex-direction: column;
-  gap: var(--space-lg);
   background-color: var(--background-color-light);
 }
 
-.homePage>*:not(:first-child) {
-  padding: var(--space-lg);
-}
 
-@media (max-width: 1024px) {
-  .homePage>*:not(:first-child) {
-    padding: var(--space-md);
-  }
-}
 
-@media (max-width: 768px) {
-  .homePage>*:not(:first-child) {
-    padding: 0;
-  }
-}
+@media (max-width: 1024px) {}
+
+@media (max-width: 768px) {}
 
 @media (max-width: 480px) {}

@@ -6,7 +6,7 @@ export const useSimilarMovies = (movieId: number) => {
     queryKey: ["similarMovies", movieId ],
     queryFn: async () => {
       const data = await getSimilar(movieId);
-      return data.results.slice(0, 5);
+      return data.results.slice(0, 10);
     }
   })
 };

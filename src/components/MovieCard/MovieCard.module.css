@@ -1,71 +1,67 @@
 .movieCard {
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 200px;
-  background-color: var(--color-surface);
+  height: 300px;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
 }
 
-.posterContainer {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 2/3;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
 .poster {
-  border-radius: var(--border-radius);
-}
-
-.overlay {
-  position: absolute;
   width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  opacity: 0;
-  transition: all 0.3s ease;
-  border-radius: var(--border-radius);
-}
-
-.playIcon {
-  height: 50px;
-  width: 50px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  border: 2px solid white;
-  border-radius: 50px;
-  font-size: 2rem;
-  color: white;
-  transform: translate(-50%, -50%);
-  padding: var(--space-md);
-}
-
-.rating {
-  padding: var(--space-sm);
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.8);
-  border-radius: var(--border-radius) 0 0 0;
+  height: 90%;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  object-fit:fill;
 }
 
 .title {
-  font-size: var(--font-size-md);
-  font-weight: 600;
-  color: var(--color-text);
-  padding: var(--space-sm) 0;
-  line-height: 1.4;
-  margin: 0;
+  padding: var(--space);
+  object-fit: cover;
 }
 
-.movieCard:hover .overlay{
-  opacity: 300%;
+.movieCardOverlay {
+  z-index: 0;
+  width: 100%;
+  height: 90%;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
 }
 
-.movieCard:hover .title {
- color: var(--accent-color);
+.movieCardOverlay .playIcon{
+  font-size: 3rem;
+  border-radius: 200px;
+  padding: 1rem;
+  border: 2px solid white;
+}
+
+.cardButtons {
+  height: 10%;
+  display: flex;
+  background-color: var(--background-color-dark);
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
+}
+
+.cardButtons button {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  color: white;
+}
+
+.movieCard:hover{
+  .movieCardOverlay{
+    opacity: 90%;
+  }
 }
 
 /* Responsive Sizes */

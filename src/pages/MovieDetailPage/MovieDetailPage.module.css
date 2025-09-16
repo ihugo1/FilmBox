@@ -5,23 +5,31 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: var(--space-lg);
-  background-color: var(--background-color-light);
+  gap: var(--space-2xl);
+  background-color: var(--background-color);
 }
 
-.movieDetailPage>*:not(:first-child) {
-  padding: var(--space-lg);
+.movieDetailPage > * {
+  padding-left: var(--space-3xl);
+  padding-right: var(--space-3xl);
 }
 
-@media (max-width: 1024px) {
-  .movieDetailPage>*:not(:first-child) {
-    padding: var(--space-md);
+.movieDetailPage > :first-child,
+.movieDetailPage > :last-child {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+@media (max-width: 992px) {
+  .movieDetailPage > * {
+    padding-left: var(--space-xl);
+    padding-right: var(--space-xl);
   }
 }
 
 @media (max-width: 768px) {
-  .movieDetailPage>*:not(:first-child) {
-    padding: 0;
+  .movieDetailPage > * {
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
   }
-
 }

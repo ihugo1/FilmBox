@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 /* CSS Reset */
 * {
   margin: 0;
@@ -8,10 +9,11 @@
 html,
 body {
   height: 100%;
+  background-color: var(--background-color);
 }
 
 body {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Poppins", sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color: var(--text-color-light);
@@ -84,10 +86,10 @@ ol {
   /* 48px */
 
   /* Color */
-  --background-color: #1a2731;
-  --background-color-light: #2b373f;
-  --background-color-dark: #131d24;
-  --accent-color: #017e35;
+  --background-color: #1c1d1e;
+  --background-color-light: rgb(39, 44, 48);
+  --background-color-dark: #121313;
+  --accent-color: #930067;
   --text-color-light: #d3d3d3;
   --text-color-dark: #1d1d1d;
 

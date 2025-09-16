@@ -2,9 +2,7 @@ import styles from "./CreditsSection.module.css";
 import { useCreditData } from "../../../hooks";
 import { getImageUrl } from "../../../config/tmdb.config";
 import { AsyncStateHandler } from "../../../components";
-import profilePlaceHolder from "/photo-placeholder.jpg";
-import { GiFilmProjector } from "react-icons/gi";
-import { FaUserLarge } from "react-icons/fa6";
+import profilePlaceHolder from "../../../assets/images/placeholders/photo-placeholder.jpg";
 
 interface CreditsSectionProps {
   movieId: number;
@@ -16,42 +14,38 @@ export const CreditsSection = ({ movieId }: CreditsSectionProps) => {
   return (
     <AsyncStateHandler isLoading={isLoading} error={error}>
       <div className={styles.movieCreditSection}>
-        <h3>
-          <GiFilmProjector className={styles.icon} />
-          Director
-        </h3>
+        <div className={styles.castContainer}>
+          <h3>Top Cast</h3>
+          <div className={styles.castList}>
+            {data?.castMembers.map((castMember) => (
+              <div className={styles.castMemberContainer} key={castMember.name}>
+                <img
+                  src={
+                    castMember.name
+                      ? getImageUrl(castMember.profile_path || "", "profile")
+                      : profilePlaceHolder
+                  }
+                />
+                <p className={styles.castMemberName}>{castMember.name}</p>
+                <p className={styles.castMemberCharacter}>
+                  {castMember.character}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
         <div className={styles.directorContainer}>
+          <h3>Director</h3>
           <img
             src={
               data?.director?.profile_path
-                ? getImageUrl(data?.director?.profile_path, "profile")
+                ? getImageUrl(data.director.profile_path, "profile")
                 : profilePlaceHolder
             }
             alt={data?.director?.name}
           />
           <p className={styles.directorName}>{data?.director?.name}</p>
         </div>
-        <h3>
-          <FaUserLarge className={styles.icon} />
-          Cast
-        </h3>
-        <ul className={styles.castList}>
-          {data?.castMembers?.map((member) => (
-            <li key={member.name} className={styles.castMemberContainer}>
-              <img
-                src={
-                  member.profile_path
-                    ? getImageUrl(member.profile_path, "profile")
-                    : profilePlaceHolder
-                }
-                alt={member.name}
-                className={styles.castImage}
-              />
-              <p className={styles.castName}>{member.name}</p>
-              <p className={styles.castCharacter}>{member.character}</p>
-            </li>
-          ))}
-        </ul>
       </div>
     </AsyncStateHandler>
   );
