@@ -9,3 +9,6 @@ export * from "./movie/useSimilarMovies";
 export * from "./movie/useTopRatedMovies";
 
 export * from "./util/useDebounce";
+
+export * from "./person/useGetPersonDetails";
+export * from "./person/useGetPersonMovieCredits";

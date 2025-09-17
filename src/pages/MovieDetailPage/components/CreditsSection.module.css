@@ -11,6 +11,9 @@
   flex-direction: column;
   align-items: center;
   width: 150px;
+  padding: var(--space-sm);
+  border-radius: var(--border-radius);
+  transition: all 0.3s ease-in-out;
 }
 
 .directorContainer h3 {
@@ -52,6 +55,9 @@
   align-items: center;
   width: 150px;
   margin-right: auto;
+  padding: var(--space-sm);
+  border-radius: var(--border-radius);
+  transition: all 0.3s ease-in-out;
 }
 
 .castContainer img {
@@ -62,12 +68,20 @@
   margin-bottom: var(--space-sm);
 }
 
-.castMemberName, .castMemberCharacter, .directorName{
+.castMemberName,
+.castMemberCharacter,
+.directorName {
   font-size: var(--font-size-md);
   text-align: center;
 }
 
-.castMemberCharacter{
+.castMemberCharacter {
   opacity: 40%;
   font-size: var(--font-size-sm);
+}
+
+.castMemberContainer:hover,
+.directorContainer:hover {
+  background-color: var(--background-color-light);
+  cursor: pointer;
 }

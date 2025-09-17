@@ -1,8 +1,11 @@
+/* Genre */
+
 export type Genre = {
   id: number;
   name: string;
 };
 
+/* Movie */
 export type Movie = {
   id: number;
   title: string;
@@ -21,12 +24,14 @@ export type CastMember = {
   name: string;
   profile_path?: string | null;
   character: string;
+  id: number;
 };
 
 export type CrewMember = {
   name: string;
   profile_path?: string | null;
   job: string;
+  id: number;
 };
 
 export interface MovieVideo {
@@ -58,6 +63,38 @@ export type CreditResponse = {
 
 export type GenresResponse = {
   genres: Genre[];
+};
+
+export type PersonCastCredit = {
+  id: number;
+  title: string;
+  poster_path: string;
+  release_date: string;
+  character: string;
+};
+
+export type PersonCrewCredit = {
+  id: number;
+  title: string;
+  poster_path: string;
+  release_date: string;
+  job: string;
+};
+
+export type Person = {
+  biography: string;
+  birthday: string;
+  deathday?: string;
+  id: number;
+  name: string;
+  profile_path: string;
+  place_of_birth: string;
+};
+
+export type PersonMovieCreditResponse = {
+  id: number;
+  cast: PersonCastCredit[];
+  crew: PersonCrewCredit[];
 };
 
 export const SORT_OPTIONS = [

@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import {
   createContext,
   useContext,
@@ -79,21 +80,31 @@ export const MovieListsProvider = ({ children }: { children: ReactNode }) => {
   }, [watchLaterMoviesIds]);
 
   const addToFavorite = (id: number) => {
-    if (favoriteMoviesIds.includes(id)) return;
+    if (favoriteMoviesIds.includes(id)) {
+      toast("Already in favorites");
+      return;
+    }
     setFavoriteMoviesIds((prev) => [...prev, id]);
+    toast.success("Added to favorites");
   };
 
   const addToWatchLater = (id: number) => {
-    if (watchLaterMoviesIds.includes(id)) return;
+    if (watchLaterMoviesIds.includes(id)) {
+      toast("Already in watch later list");
+      return;
+    }
     setWatchLaterMoviesIds((prev) => [...prev, id]);
+    toast.success("Added to watch later list");
   };
 
   const removeFromFavorite = (id: number) => {
     setFavoriteMoviesIds((prev) => prev.filter((movieId) => movieId !== id));
+    toast.error("Removed from favorites");
   };
 
   const removeFromWatchLater = (id: number) => {
     setWatchLaterMoviesIds((prev) => prev.filter((movieId) => movieId !== id));
+    toast.error("Removed from watch later list");
   };
 
   const isInFavorite = (id: number) => {

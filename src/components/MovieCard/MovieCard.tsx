@@ -29,7 +29,8 @@ export const MovieCard = ({ movie }: MovieCardProps) => {
           }
           alt={movie.title}
         />
-        <div className={styles.cardButtons}>
+        {/*
+                <div className={styles.cardButtons}>
           <button className={styles.favoriteButton}>
             <IoMdHeart />
           </button>
@@ -37,6 +38,7 @@ export const MovieCard = ({ movie }: MovieCardProps) => {
             <IoMdBookmark />
           </button>
         </div>
+        */}
       </div>
     </div>
   );
