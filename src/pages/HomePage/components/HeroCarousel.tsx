@@ -9,13 +9,37 @@ interface Props {
 
 export const HeroCarousel = ({ movies }: Props) => {
   const [currentMovieIndex, setCurrentMovieIndex] = useState(0);
+  const [touchStartX, setTouchStartX] = useState(0);
 
   const handleNextMovie = () => {
     setCurrentMovieIndex((prevIndex) => (prevIndex + 1) % movies.length);
   };
 
+  const handlePrevMovie = () => {
+    setCurrentMovieIndex(
+      (prevIndex) => (prevIndex - 1 + movies.length) % movies.length
+    );
+  };
+
   const handleDotClick = (index: number) => {
     setCurrentMovieIndex(index);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartX - touchEndX;
+
+    if (diff > 50) {
+      // Swiped left
+      handleNextMovie();
+    } else if (diff < -50) {
+      // Swiped right
+      handlePrevMovie();
+    }
   };
 
   useEffect(() => {
@@ -39,6 +63,8 @@ export const HeroCarousel = ({ movies }: Props) => {
       <div
         className={styles.slidesContainer}
         style={{ transform: `translateX(-${currentMovieIndex * 100}%)` }}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
       >
         {movies.map((movie) => (
           <div key={movie.id} className={styles.heroContainer}>

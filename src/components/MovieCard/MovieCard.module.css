@@ -2,8 +2,8 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 200px;
-  height: 300px;
+  width: 250px;
+  height: 350px;
   border-radius: var(--radius-lg);
   overflow: hidden;
   cursor: pointer;
@@ -66,7 +66,8 @@
 /* Responsive Sizes */
 @media (max-width: 768px) {
   .movieCard {
-    width: 150px;
+    width: 200px;
+    height: 300px;
   }
 
   .title {
@@ -77,7 +78,8 @@
 
 @media (max-width: 480px) {
   .movieCard {
-    width: 150px;
+    width: 180px;
+    height: 270px;
   }
 
   .title {

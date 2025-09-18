@@ -4,7 +4,9 @@ import type { Movie } from "../../types";
 import { getImageUrl } from "../../config/tmdb.config";
 import placeHolderImage from "../../../public/poster-placeholder.png";
 import { IoPlay } from "react-icons/io5";
+/*
 import { IoMdHeart, IoMdBookmark } from "react-icons/io";
+*/
 
 interface MovieCardProps {
   movie: Movie;
