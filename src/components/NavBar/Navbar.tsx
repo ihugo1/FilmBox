@@ -16,7 +16,7 @@ export const Navbar = () => {
 
   const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && searchQuery.trim()) {
-      navigate(`/search?q=${searchQuery.trim()}`);
+      navigate(`/search?query=${searchQuery.trim()}`);
     }
   };
 

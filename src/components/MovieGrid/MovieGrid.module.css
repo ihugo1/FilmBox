@@ -34,6 +34,13 @@
   justify-items: center;
 }
 
+.loaderContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+}
 
 @media (max-width: 992px) {
   .grid{

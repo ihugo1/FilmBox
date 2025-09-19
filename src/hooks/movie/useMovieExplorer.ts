@@ -11,7 +11,14 @@ export const useMovieExplorer = (
   genreId: number | null,
   sortedBy: SortOption
 ) => {
-  return useInfiniteQuery({
+  const {
+    data,
+    isLoading,
+    error,
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery({
     queryKey: ["explorerMovieList", query, genreId, sortedBy],
     initialPageParam: 1,
     queryFn: async ({ pageParam }) => {
@@ -33,4 +40,10 @@ export const useMovieExplorer = (
       }
     },
   });
+
+  const movies = data?.pages.flatMap((page) => page.results) || [];
+
+  return{
+    movies, isLoading, error, hasNextPage, fetchNextPage, isFetchingNextPage
+  }
 };
