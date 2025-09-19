@@ -3,6 +3,8 @@ import { HeroCarousel } from "./components/HeroCarousel";
 import { MovieSlider } from "../../components";
 import { usePopularMovies, useTopRatedMovies } from "../../hooks";
 
+import { useEffect } from "react";
+
 export const HomePage = () => {
   const {
     data: popularMovies,
@@ -15,6 +17,10 @@ export const HomePage = () => {
     isLoading: loadingTopRatedMovies,
     error: errorTopRatedMovies,
   } = useTopRatedMovies();
+
+  useEffect(() => {
+    document.title = "FilmBox - Home";
+  }, []);
 
   const heroMovies = popularMovies ? popularMovies.slice(0, 5) : [];
 

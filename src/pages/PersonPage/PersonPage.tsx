@@ -4,6 +4,7 @@ import { PersonMovieList } from "./components/PersonMovieList";
 import { AsyncStateHandler } from "../../components";
 import { getImageUrl } from "../../config/tmdb.config";
 import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 
 const calculateAge = (birthday: string, deathday?: string | null): number => {
   const birthDate = new Date(birthday);
@@ -25,6 +26,16 @@ export const PersonPage = () => {
     isLoading: isLoadingPersonData,
     error: errorPersonData,
   } = useGetPersonDetails(personId);
+
+  useEffect(() => {
+    if (personData) {
+      document.title = `${personData.name} - FilmBox`;
+    }
+
+    return () => {
+      document.title = "FilmBox";
+    };
+  }, [personData]);
 
   return (
     <div className={styles.personPage}>

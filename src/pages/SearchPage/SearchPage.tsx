@@ -56,6 +56,10 @@ export const SearchPage = () => {
   }, [searchTerm, selectedGenre]);
 
   useEffect(() => {
+    document.title = "FilmBox - Search";
+  }, []);
+
+  useEffect(() => {
     const params: { query?: string; genre?: string; sort?: SortOption } = {};
 
     if (debouncedSearchTerm.trim()) {

@@ -6,6 +6,7 @@ import { useMovieLists } from "../../../context/MovieListsContext";
 import { IoMdHeart, IoMdBookmark } from "react-icons/io";
 import backdropPlaceHolder from "/flat-background.png";
 import posterPlaceHolder from "/poster-placeholder.png";
+import { useEffect } from "react";
 
 interface InfoSectionProps {
   movieId: number;
@@ -22,18 +23,32 @@ export const InfoSection = ({ movieId }: InfoSectionProps) => {
     removeFromWatchLater,
   } = useMovieLists();
 
+  useEffect(() => {
+    if (movie) {
+      document.title = `${movie.title} - FilmBox`;
+    }
+
+    return () => {
+      document.title = "FilmBox";
+    };
+  }, [movie]);
+
   const handleFavoriteButton = () => {
     if (!movie) return;
-    isInFavorite(movie.id)
-      ? removeFromFavorite(movie.id)
-      : addToFavorite(movie.id);
+    if (isInFavorite(movie.id)) {
+      removeFromFavorite(movie.id);
+    } else {
+      addToFavorite(movie.id);
+    }
   };
 
   const handleWatchLaterButton = () => {
     if (!movie) return;
-    isInWatchLater(movie.id)
-      ? removeFromWatchLater(movie.id)
-      : addToWatchLater(movie.id);
+    if (isInWatchLater(movie.id)) {
+      removeFromWatchLater(movie.id);
+    } else {
+      addToWatchLater(movie.id);
+    }
   };
 
   return (

@@ -4,6 +4,8 @@ import { MovieGrid, AsyncStateHandler } from "../../components";
 import { useMovieLists } from "../../context/MovieListsContext";
 import { IoMdHeart, IoMdBookmark } from "react-icons/io";
 
+import { useEffect } from "react";
+
 export const MovieListsPage = () => {
   const { watchLaterIds, favoriteIds } = useMovieLists();
   const {
@@ -16,6 +18,10 @@ export const MovieListsPage = () => {
     isLoading: isLoadingFavorites,
     error: errorFavorites,
   } = useGetMoviesByIds(favoriteIds);
+
+  useEffect(() => {
+    document.title = "FilmBox - My Lists";
+  }, []);
 
   return (
     <div className={styles.movieListsPage}>
